@@ -26,9 +26,21 @@
                     <tbody>
                         @foreach ($penjual as $item)
                             <tr>
-                                <td>{{ $item->nama}}</td>
+                                <td>{{ $item->nama }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->hp }}</td>
+                                <td>
+                                    <div class="d-flex gap-10">
+                                        <a href="{{ route('penjual.edit', ['penjual' => $item]) }}" type="button"
+                                            class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                        <form action="{{ route('penjual.destroy', ['penjual' => $item]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

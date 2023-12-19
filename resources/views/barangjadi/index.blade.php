@@ -16,16 +16,16 @@
                                 Nama
                             </th>
                             <th>
-                                Ukuran 
+                                Ukuran
                             </th>
                             <th>
-                                Stock 
+                                Stock
                             </th>
-                            <th> 
+                            <th>
                                 Harga
                             </th>
                             <th>
-                                
+
                             </th>
                         </tr>
                     </thead>
@@ -37,7 +37,17 @@
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->harga }}</td>
                                 <td>
-                                    <a href="{{ route('barangjadi.edit',['barangjadi'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw">Edit</a>
+                                    <div class="d-flex gap-10">
+                                        <a href="{{ route('barangjadi.edit', ['barangjadi' => $item]) }}" type="button"
+                                            class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                        <form action="{{ route('barangjadi.destroy', ['barangjadi' => $item]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                        </form>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach

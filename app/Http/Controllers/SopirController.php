@@ -53,7 +53,10 @@ class SopirController extends Controller
      */
     public function edit(Sopir $sopir)
     {
-        //
+        $data['sopir'] = $sopir;
+        // dd($data['sopir']);
+        return view('sopir.edit', $data);
+
     }
 
     /**
@@ -61,7 +64,9 @@ class SopirController extends Controller
      */
     public function update(Request $request, Sopir $sopir)
     {
-        //
+        $sopir->nama=$request->nama;
+        $sopir-> save();
+        return redirect()->route('sopir.index')->with('success', $request->nama_sopir.' berhasil disimpan.');
     }
 
     /**
@@ -69,6 +74,8 @@ class SopirController extends Controller
      */
     public function destroy(Sopir $sopir)
     {
-        //
+        $sopir->delete();
+
+        return redirect()->route('sopir.index')->with('success', $sopir->nama . ' berhasil dihapus.');
     }
 }

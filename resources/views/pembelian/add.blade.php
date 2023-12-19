@@ -73,6 +73,12 @@
                                         @endforeach
                                     </select>
                                 </td>
+                                <td>
+                                    <input type="number" name="jumlah[]" id="">
+                                </td>
+                                <td>
+                                    <input type="number" name="harga[]" id="">
+                                </td>
                             </tr>
                         </tbody>
                     </table>

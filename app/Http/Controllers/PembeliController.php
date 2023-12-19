@@ -79,6 +79,8 @@ class PembeliController extends Controller
      */
     public function destroy(Pembeli $pembeli)
     {
-        //
+        $pembeli->delete();
+
+        return redirect()->route('pembeli.index')->with('success', $pembeli->nama . ' berhasil dihapus.');
     }
 }

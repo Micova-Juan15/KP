@@ -53,7 +53,10 @@ class TrukController extends Controller
      */
     public function edit(Truk $truk)
     {
-        //
+        $data['truk'] = $truk;
+        // dd($data['truk']);
+        return view('truk.edit', $data);
+
     }
 
     /**
@@ -61,7 +64,11 @@ class TrukController extends Controller
      */
     public function update(Request $request, Truk $truk)
     {
-        //
+        $truk->plat=$request->plat;
+        $truk->save();
+        return redirect()->route('truk.index')->with('success', $request->nama_truk.' berhasil disimpan.');
+
+
     }
 
     /**
@@ -69,6 +76,8 @@ class TrukController extends Controller
      */
     public function destroy(Truk $truk)
     {
-        //
+        $truk->delete();
+
+        return redirect()->route('truk.index')->with('success', $truk->nama . ' berhasil dihapus.');
     }
 }

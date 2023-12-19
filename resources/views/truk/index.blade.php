@@ -25,6 +25,17 @@
                             <td>
                                 {{$item->plat}}
                             </td>
+                            <td>
+                                <div class="d-flex gap-10">
+                                    <a href="{{ route('truk.edit',['truk'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                    <form action="{{ route('truk.destroy',['truk'=>$item])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                    </form>
+                                    </div>
+
+                            </td>
                         </tr>
                             
                         @endforeach

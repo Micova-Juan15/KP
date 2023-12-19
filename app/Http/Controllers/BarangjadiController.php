@@ -81,6 +81,9 @@ class BarangjadiController extends Controller
      */
     public function destroy(Barangjadi $barangjadi)
     {
-        //
+        $barangjadi->delete();
+
+        return redirect()->route('barangjadi.index')->with('success', $barangjadi->nama . ' berhasil dihapus.');
+//
     }
 }

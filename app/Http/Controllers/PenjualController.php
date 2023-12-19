@@ -55,7 +55,10 @@ class PenjualController extends Controller
      */
     public function edit(Penjual $penjual)
     {
-        //
+        $data['penjual'] = $penjual;
+        // dd($data['penjual']);
+        return view('penjual.edit', $data);
+
     }
 
     /**
@@ -63,7 +66,13 @@ class PenjualController extends Controller
      */
     public function update(Request $request, Penjual $penjual)
     {
-        //
+        $penjual->nama=$request->nama;
+        $penjual->alamat=$request->alamat;
+        $penjual->hp=$request->hp;
+        $penjual->save();
+        // redirect ke penjual.index
+        return redirect()->route('penjual.index')->with('success', $request->nama_penjual.' berhasil disimpan.');
+
     }
 
     /**
@@ -71,6 +80,8 @@ class PenjualController extends Controller
      */
     public function destroy(Penjual $penjual)
     {
-        //
+        $penjual->delete();
+
+        return redirect()->route('penjual.index')->with('success', $penjual->nama . ' berhasil dihapus.');
     }
 }

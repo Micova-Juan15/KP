@@ -30,7 +30,14 @@
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->hp }}</td>
                                 <td>
-                                    <a href="{{ route('pembeli.edit',['pembeli'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw">Edit</a>
+                                    <div class="d-flex gap-10">
+                                    <a href="{{ route('pembeli.edit',['pembeli'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                    <form action="{{ route('pembeli.destroy',['pembeli'=>$item])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                    </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
