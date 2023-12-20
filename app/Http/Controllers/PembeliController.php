@@ -12,7 +12,7 @@ class PembeliController extends Controller
      */
     public function index()
     {
-        
+
         $data['pembeli'] = Pembeli::all();
         // dd($data['pembeli']);
         return view('pembeli.index', $data);
@@ -32,14 +32,19 @@ class PembeliController extends Controller
      */
     public function store(Request $request)
     {
-        $pembeli= new Pembeli();
-        $pembeli->nama=$request->nama;
-        $pembeli->alamat=$request->alamat;
-        $pembeli->hp=$request->hp;
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'hp' => 'required|string|regex:/^[0-9]+$/|min:7|max:13',        
+        ]);
+
+        $pembeli = new Pembeli();
+        $pembeli->nama = $request->nama;
+        $pembeli->alamat = $request->alamat;
+        $pembeli->hp = $request->hp;
         $pembeli->save();
         // redirect ke pembeli.index
-        return redirect()->route('pembeli.index')->with('success', $request->nama_pembeli.' berhasil disimpan.');
-
+        return redirect()->route('pembeli.index')->with('success', $request->nama_pembeli . ' berhasil disimpan.');
     }
 
     /**
@@ -57,7 +62,6 @@ class PembeliController extends Controller
     {
         $data['pembeli'] = $pembeli;
         return view('pembeli.edit', $data);
-
     }
 
     /**
@@ -65,13 +69,17 @@ class PembeliController extends Controller
      */
     public function update(Request $request, Pembeli $pembeli)
     {
-        $pembeli->nama=$request->nama;
-        $pembeli->alamat=$request->alamat;
-        $pembeli->hp=$request->hp;
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'hp' => 'required|string|regex:/^[0-9]+$/|min:7|max:13',
+        ]);
+        $pembeli->nama = $request->nama;
+        $pembeli->alamat = $request->alamat;
+        $pembeli->hp = $request->hp;
         $pembeli->save();
 
-        return redirect()->route('pembeli.index')->with('success', $request->nama_pembeli.' berhasil disimpan.');
-
+        return redirect()->route('pembeli.index')->with('success', $request->nama_pembeli . ' berhasil disimpan.');
     }
 
     /**

@@ -10,11 +10,11 @@
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id ="datatable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>
-                                Nama PT
+                                Penjual
                             </th>
                             <th>
                                 Tanggal
@@ -23,23 +23,29 @@
                                 No.Nota
                             </th>
                             <th>
-                                harga beli
+                                Harga Beli
                             </th>
                             <th>
-                                Total Harga
+                                Ongkir
                             </th>
                             <th>
                                 Potongan
                             </th>
+                            <th>
+
+                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pembelian as $item)
                             <tr>
-                                <td>{{ $item->idpembeli }}</td>
-                                <td>{{ $item->idpembelian }}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->hargabeli }}</td>
+                                <td>{{ $item->penjual->nama }}</td>
+                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ $item->idnota }}</td>
+                                <td>{{ $item->totalharga }}</td>
+                                <td>{{ $item->ongkir }}</td>
+                                <td>{{ $item->potongan }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
                                     <a href="{{ route('pembelian.edit',['pembelian'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengantaran;
+use App\Models\Penjualan;
+use App\Models\Sopir;
+use App\Models\Truk;
 use Illuminate\Http\Request;
 
 class PengantaranController extends Controller
@@ -23,8 +26,11 @@ class PengantaranController extends Controller
      */
     public function create()
     {
-        //
-        return view('pengantaran.add');
+        $data['penjualan'] = Penjualan::all();
+        $data['sopir'] = Sopir::all();
+        $data['truk'] = Truk::all();
+
+        return view('pengantaran.add',$data);
     }
 
     /**
@@ -32,6 +38,13 @@ class PengantaranController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'tanggal' => 'required|date',
+            'idtruk' => 'required',
+            'idsopir' => 'required',
+            'idpenjualan' => 'required',
+         ]);
+
         $pengantaran=new Pengantaran();
         $pengantaran->tanggal=$request->tanggal;
         $pengantaran->idpenjualan=$request->idpenjualan;

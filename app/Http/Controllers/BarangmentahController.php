@@ -32,7 +32,13 @@ class BarangmentahController extends Controller
      */
     public function store(Request $request)
     {
-        // redirect ke barang.index
+        $this->validate($request, [
+            'nama' => 'required',
+            'jumlah' => 'required|min:1|numeric',
+            'satuan' => 'required',
+            'harga' => 'required|numeric',
+        ]);
+
         $barangmentah = new Barangmentah();
         $barangmentah->nama = $request->nama;
         $barangmentah->jumlah = $request->jumlah;
@@ -64,6 +70,12 @@ class BarangmentahController extends Controller
      */
     public function update(Request $request, Barangmentah $barangmentah)
     {
+        $this->validate($request, [
+            'nama' => 'required',
+            'jumlah' => 'required|min:1',
+            'satuan' => 'required',
+            'harga' => 'required',
+        ]);
         $barangmentah->nama = $request->nama;
         $barangmentah->jumlah = $request->jumlah;
         $barangmentah->satuan = $request->satuan;

@@ -8,8 +8,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="idpenjual">Penjual</label>
-                    <input type="text" class="form-control" name="idpenjual" placeholder="Masukkan nama penjual"
-                        value="{{ old('idpenjual') }}">
+                    <br>
+
+                    <select class = " form-control"name="idpenjual" id=" ">
+                        @foreach ($penjual as $item)
+                        <option value="{{$item->id }}">
+                        {{$item->nama}}
+                        </option>
+                        @endforeach
+                    </select>
                     @error('idpenjual')
                         <span class="text-danger"idpenjual>{{ $message }}</span>
                     @enderror
@@ -47,17 +54,20 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <table>
+                    <button class="btn btn-success" type="button" onclick="addrow()">
+                        Tambah
+                    </button>
+                    <table id="tableform">
                         <thead>
                             <tr>
                                 <th>
-                                    barang
+                                    Barang Mentah
                                 </th>
                                 <th>
-                                    jumlah
+                                    Jumlah
                                 </th>
                                 <th>
-                                    harga
+                                    Harga Beli
                                 </th>
                                 <th></th>
                             </tr>
@@ -65,7 +75,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="idbarang[]" id="">
+                                    <select class="form-control" name="idbarang[]" id="">
                                         @foreach ($barang as $item)
                                             <option value="{{$item->id}}">
                                             {{$item->nama}}
@@ -74,10 +84,10 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" name="jumlah[]" id="">
+                                    <input class="form-control" type="number" name="jumlah[]" id="" placeholder="Masukkan Jumlah Dibeli">
                                 </td>
                                 <td>
-                                    <input type="number" name="harga[]" id="">
+                                    <input class="form-control" type="number" name="hargabeli[]" id="" placeholder="Masukkan Harga Beli"> 
                                 </td>
                             </tr>
                         </tbody>
@@ -89,4 +99,14 @@
             </form>
         </div>
     </div>
+    <script>
+        const table = document.querySelector("#tableform");
+        const tbody = table.querySelector("tbody");
+        const tableRow =tbody.querySelector("tr").cloneNode(true);
+        function addrow (){
+            tbody.insertAdjacentHTML("beforeend",tableRow.outerHTML)     
+
+        }
+    </script>
+
 @endsection

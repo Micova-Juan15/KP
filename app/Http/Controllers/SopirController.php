@@ -32,6 +32,9 @@ class SopirController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required',
+         ]);
         $sopir=new Sopir();
         $sopir->nama=$request->nama;
         $sopir-> save();
@@ -64,6 +67,10 @@ class SopirController extends Controller
      */
     public function update(Request $request, Sopir $sopir)
     {
+        $this->validate($request,[
+            'nama' => 'required',
+         ]);
+
         $sopir->nama=$request->nama;
         $sopir-> save();
         return redirect()->route('sopir.index')->with('success', $request->nama_sopir.' berhasil disimpan.');

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barangjadi;
+use App\Models\Detail_penjualan;
+use App\Models\Pembeli;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 
@@ -23,8 +26,11 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        //
-        return view('penjualan.add');
+        $data['pembeli'] = Pembeli::all();
+        $data['barang'] = Barangjadi::all();
+        // dd($data['penjualan']);
+
+        return view('penjualan.add',$data);
     }
 
     /**
@@ -32,15 +38,33 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->validate($request, [
+        //     'tanggal' => 'required|date',
+        //     'idpembeli' => 'required',
+        //     'idnota' => 'required',
+        //     'totalharga' => 'required|numeric',
+        //     'ongkir' => 'required|numeric',
+        //     'potongan' => 'required|numeric',
+        // ]);
 
         $penjualan=new Penjualan();
         $penjualan->tanggal=$request->tanggal;
         $penjualan->idpembeli=$request->idpembeli;
         $penjualan->idnota=$request->idnota;
-        $penjualan->totalharga=$request->totalharga;
-        $penjualan->ongkir=$request->ongkir;
-        $penjualan->potongan=$request->potongan;
+        $penjualan->totalharga=0;
+        $penjualan->ongkir=$request->ongkir??0;
+        $penjualan->potongan=$request->potongan??0;
         $penjualan->save();
+        
+        for ($i=0; $i < count($request->idbarang); $i++) { 
+            $detailpenjualan = new Detail_penjualan();
+            $detailpenjualan->idpenjualan = $penjualan->id;
+            $detailpenjualan->idbarang = $request->idbarang[$i];
+            $detailpenjualan->jumlah = $request->jumlah[$i];
+            $detailpenjualan->hargajual = $request->hargajual[$i];
+            $detailpenjualan->save();
+        }
+
         // redirect ke penjualan.index
         return redirect()->route('penjualan.index')->with('success', $request->nama_penjualan.' berhasil disimpan.');
 

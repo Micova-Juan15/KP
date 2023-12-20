@@ -19,6 +19,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    {{-- <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"> --}}
+    {{-- <script src="{{ asset('js/datatables.min.js') }}"></script> --}}
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.js"></script>
+
 </head>
 
 <body>
@@ -36,6 +42,13 @@
                         <span class="menu-title">Dashboard</span>
                         <div class="badge badge-info badge-pill">2</div>
                     </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.index') }}">
+                            <i class="mdi mdi-account-multiple-plus
+                            menu-icon"></i>
+                            <span class="menu-title">User</span>
+                        </a>
+                    </li>    
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('barangmentah.index') }}">
@@ -123,7 +136,7 @@
                         <a class="navbar-brand brand-logo-mini" href="index.html"><img
                                 src="{{ url('images/logo-mini.svg') }}" alt="logo" /></a>
                     </div>
-                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, 
+                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back,
                     </h4>
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item">
@@ -360,6 +373,11 @@
                     }
                 });
         });
+        $.noConflict();
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+        
     </script>
 </body>
 

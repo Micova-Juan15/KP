@@ -9,31 +9,37 @@
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id ="datatable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>
                                 idpenjualan
                             </th>
                             <th>
-                                tanggal
+                                Tanggal
                             </th>
                             <th>
                                 Nama Sopir
                             </th>
                             <th>
-                                Plat kendaraa
+                                Plat kendaraan
+                            </th>
+                            <th>
+                                Alamat
                             </th>
                     </thead>
                     <tbody>
                         @foreach ($pengantaran as $item)
                             <tr>
-                                <td>{{ $item->idpenjualan }}</td>
-                                <td>{{ $item->tanggal }}</td>
-                                <td>{{ $item->idsopir }}</td>
-                                <td>{{ $item->idmobil }}</td>
+                                <td>{{ $item->penjualan->idnota }}</td>
 
+                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ $item->sopir->nama }}</td>
+                                <td>{{ $item->truk->plat}}</td>
+                                <td>{{ $item->penjualan->pembeli->alamat}}</td>
+                                
                             </tr>
+                            
                         @endforeach
                     </tbody>
                 </table>

@@ -12,7 +12,7 @@ class TrukController extends Controller
      */
     public function index()
     {
-        
+
         $data['truk'] = Truk::all();
         // dd($data['truk']);
         return view('truk.index', $data);
@@ -32,12 +32,14 @@ class TrukController extends Controller
      */
     public function store(Request $request)
     {
-        $truk=new Truk();
-        $truk->plat=$request->plat;
+        $this->validate($request, [
+            'plat' => 'required|min:6|max:12',
+        ]);
+        $truk = new Truk();
+        $truk->plat = $request->plat;
         $truk->save();
         // redirect ke truk.index
-        return redirect()->route('truk.index')->with('success', $request->nama_truk.' berhasil disimpan.');
-
+        return redirect()->route('truk.index')->with('success', $request->nama_truk . ' berhasil disimpan.');
     }
 
     /**
@@ -56,7 +58,6 @@ class TrukController extends Controller
         $data['truk'] = $truk;
         // dd($data['truk']);
         return view('truk.edit', $data);
-
     }
 
     /**
@@ -64,11 +65,12 @@ class TrukController extends Controller
      */
     public function update(Request $request, Truk $truk)
     {
-        $truk->plat=$request->plat;
+        $this->validate($request, [
+            'plat' => 'required|min:6|max:12',
+        ]);
+        $truk->plat = $request->plat;
         $truk->save();
-        return redirect()->route('truk.index')->with('success', $request->nama_truk.' berhasil disimpan.');
-
-
+        return redirect()->route('truk.index')->with('success', $request->nama_truk . ' berhasil disimpan.');
     }
 
     /**

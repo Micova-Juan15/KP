@@ -9,34 +9,38 @@
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id ="datatable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>
-                                idbarang
+                                Pembeli
                             </th>
                             <th>
-                                idpenjual
+                                Tanggal
                             </th>
                             <th>
-                                idpenjualan
+                                No.Nota
                             </th>
                             <th>
-                                jumlah
+                                Ongkir
                             </th>
                             <th>
-                                hargajual
+                                Potongan
+                            </th>
+                            <th>
+                                Total Harga
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($penjualan as $item)
                             <tr>
-                                <td>{{ $item->idbarang }}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->hargajual }}</td>
-                                <td>{{ $item->idpenjualan }}</td>
-                                <td>{{ $item->idpenjual }}</td>
+                                <td>{{ $item->pembeli->nama }}</td>
+                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ $item->idnota }}</td>
+                                <td>{{ $item->ongkir }}</td>
+                                <td>{{ $item->potongan }}</td>
+                                <td>{{ $item->totalharga }}</td>
                             </tr>
                         @endforeach
                     </tbody>

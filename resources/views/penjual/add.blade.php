@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Tambah Pembeli</h4>
+            <h4 class="card-title">Tambah Penjual</h4>
             <form class="forms-sample" action="{{ route('penjual.store') }}" method="POST">
                 @csrf
                 <div class="form-group">

@@ -32,6 +32,12 @@ class BarangjadiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required',
+            'ukuran' => 'required',
+            'jumlah' => 'required|min:1|numeric',
+            'harga' => 'required|numeric',
+         ]);
         $barangjadi= new Barangjadi();
         $barangjadi->nama=$request->nama;
         $barangjadi->ukuran=$request->ukuran;
@@ -66,6 +72,12 @@ class BarangjadiController extends Controller
      */
     public function update(Request $request, Barangjadi $barangjadi)
     {
+        $this->validate($request,[
+            'nama' => 'required',
+            'ukuran' => 'required',
+            'jumlah' => 'required|min:1|numeric',
+            'harga' => 'required|numeric',
+         ]);
         $barangjadi->nama = $request->nama;
         $barangjadi->ukuran = $request->ukuran;
         $barangjadi->jumlah = $request->jumlah;

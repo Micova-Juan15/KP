@@ -3,13 +3,13 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Barang</h4>
+            <h4 class="card-title">Barang Jadi</h4>
             <div class="table-responsive">
                 <a href="{{ route('barangjadi.create') }}" type="button" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id ="datatable"class="table table-striped">
                     <thead>
                         <tr>
                             <th>

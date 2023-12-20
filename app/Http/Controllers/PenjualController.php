@@ -12,7 +12,7 @@ class PenjualController extends Controller
      */
     public function index()
     {
-        
+
         $data['penjual'] = Penjual::all();
         // dd($data['penjual']);
         return view('penjual.index', $data);
@@ -32,14 +32,19 @@ class PenjualController extends Controller
      */
     public function store(Request $request)
     {
-        $penjual=new Penjual();
-        $penjual->nama=$request->nama;
-        $penjual->alamat=$request->alamat;
-        $penjual->hp=$request->hp;
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'hp' => 'required|string|regex:/^[0-9]+$/|min:7|max:13',        
+        ]);
+
+        $penjual = new Penjual();
+        $penjual->nama = $request->nama;
+        $penjual->alamat = $request->alamat;
+        $penjual->hp = $request->hp;
         $penjual->save();
         // redirect ke penjual.index
-        return redirect()->route('penjual.index')->with('success', $request->nama_penjual.' berhasil disimpan.');
-
+        return redirect()->route('penjual.index')->with('success', $request->nama_penjual . ' berhasil disimpan.');
     }
 
     /**
@@ -58,7 +63,6 @@ class PenjualController extends Controller
         $data['penjual'] = $penjual;
         // dd($data['penjual']);
         return view('penjual.edit', $data);
-
     }
 
     /**
@@ -66,13 +70,17 @@ class PenjualController extends Controller
      */
     public function update(Request $request, Penjual $penjual)
     {
-        $penjual->nama=$request->nama;
-        $penjual->alamat=$request->alamat;
-        $penjual->hp=$request->hp;
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'hp' => 'required|string|regex:/^[0-9]+$/|min:7|max:13',        
+        ]);
+        $penjual->nama = $request->nama;
+        $penjual->alamat = $request->alamat;
+        $penjual->hp = $request->hp;
         $penjual->save();
         // redirect ke penjual.index
-        return redirect()->route('penjual.index')->with('success', $request->nama_penjual.' berhasil disimpan.');
-
+        return redirect()->route('penjual.index')->with('success', $request->nama_penjual . ' berhasil disimpan.');
     }
 
     /**

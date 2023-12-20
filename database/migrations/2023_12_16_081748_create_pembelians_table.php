@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('pembelians', function (Blueprint $table) {
             $table->id();
             $table->dateTime('tanggal');
-            $table->integer('totalharga');
-            $table->integer('ongkir');
+            $table->integer('totalharga')->default(0);
+            $table->integer('ongkir')->default(0);
             $table->string('idnota');
-            $table->integer('potongan');
+            $table->integer('potongan')->default(0);
             $table->unsignedBigInteger('idpenjual');
             $table->foreign('idpenjual')->references('id')->on('penjuals');
 

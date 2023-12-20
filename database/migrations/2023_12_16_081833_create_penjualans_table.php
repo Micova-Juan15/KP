@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idpembeli');
             $table->unsignedBigInteger('idnota');
             $table->integer('totalharga');
-            $table->integer('ongkir');
-            $table->integer('potongan');
+            $table->integer('ongkir')->default(0);
+            $table->integer('potongan')->default(0);
             $table->foreign('idpembeli')->references('id')->on('pembelis');
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\trukController;
 use App\Http\Controllers\SopirController;
 use App\Http\Controllers\PengantaranController;
+use App\Http\Controllers\UserController;
 use App\Models\Barangjadi;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\Route;
@@ -52,15 +53,12 @@ Route::get('/sopir/{sopir}/edit', [SopirController::class, 'edit'])->name('sopir
 Route::patch('/sopir/{sopir}', [SopirController::class, 'update'])->name('sopir.update');
 Route::delete('/sopir/{sopir}', [SopirController::class, 'destroy'])->name('sopir.destroy');
 
-
-
 Route::get('/barangjadi', [BarangjadiController::class, 'index'])->name('barangjadi.index');
 Route::get('/barangjadi/create', [BarangjadiController::class, 'create'])->name('barangjadi.create');
 Route::post('/barangjadi/store', [BarangjadiController::class, 'store'])->name('barangjadi.store');
 Route::get('/barangjadi/{barangjadi}/edit', [BarangjadiController::class, 'edit'])->name('barangjadi.edit');
 Route::patch('/barangjadi/{barangjadi}', [BarangjadiController::class, 'update'])->name('barangjadi.update');
 Route::delete('/barangjadi/{barangjadi}', [BarangjadiController::class, 'destroy'])->name('barangjadi.destroy');
-
 
 Route::get('/barangmentah', [BarangmentahController::class, 'index'])->name('barangmentah.index');
 Route::get('/barangmentah/create', [BarangmentahController::class, 'create'])->name('barangmentah.create');
@@ -72,10 +70,15 @@ Route::delete('/barangmentah/{barangmentah}', [BarangmentahController::class, 'd
 Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
 Route::get('/pembelian/create', [PembelianController::class, 'create'])->name('pembelian.create');
 Route::post('/pembelian/store', [PembelianController::class, 'store'])->name('pembelian.store');
+Route::get('/pembelian/{pembelian}/edit', [PembelianController::class, 'edit'])->name('pembelian.edit');
+Route::patch('/pembelian/{pembelian}', [PembelianController::class, 'update'])->name('pembelian.update');
+Route::delete('/pembelian/{pembelian}', [PembelianController::class, 'destroy'])->name('pembelian.destroy');
 
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
 Route::get('/penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');
 Route::post('/penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
+Route::patch('/penjualan/{penjualan}', [PenjualanController::class, 'update'])->name('penjualan.update');
+Route::delete('/penjualan/{penjualan}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
 
 Route::get('/pembeli', [PembeliController::class, 'index'])->name('pembeli.index');
 Route::get('/pembeli/create', [PembeliController::class, 'create'])->name('pembeli.create');
@@ -84,7 +87,6 @@ Route::get('/pembeli/{pembeli}/edit', [PembeliController::class, 'edit'])->name(
 Route::patch('/pembeli/{pembeli}', [PembeliController::class, 'update'])->name('pembeli.update');
 Route::delete('/pembeli/{pembeli}', [PembeliController::class, 'destroy'])->name('pembeli.destroy');
 
-
 Route::get('/penjual', [PenjualController::class, 'index'])->name('penjual.index');
 Route::get('/penjual/create', [PenjualController::class, 'create'])->name('penjual.create');
 Route::post('/penjual/store', [PenjualController::class, 'store'])->name('penjual.store');
@@ -92,10 +94,18 @@ Route::get('/penjual/{penjual}/edit', [PenjualController::class, 'edit'])->name(
 Route::patch('/penjual/{penjual}', [PenjualController::class, 'update'])->name('penjual.update');
 Route::delete('/penjual/{penjual}', [PenjualController::class, 'destroy'])->name('penjual.destroy');
 
-
 Route::get('/pengantaran', [PengantaranController::class, 'index'])->name('pengantaran.index');
 Route::get('/pengantaran/create', [PengantaranController::class, 'create'])->name('pengantaran.create');
 Route::post('/pengantaran/store', [PengantaranController::class, 'store'])->name('pengantaran.store');
+Route::patch('/pengantaran/{pengantaran}', [PengantaranController::class, 'update'])->name('pengantaran.update');
+Route::delete('/pengantaran/{pengantaran}', [PengantaranController::class, 'destroy'])->name('pengantaran.destroy');
+
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
 
 
 
