@@ -38,9 +38,53 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="button" onclick="addrow( )">
+                        Tambah
+                    </button>
+                    <table id="tableform">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Barang Mentah
+                                </th>
+                                <th>
+                                    Jumlah
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select class="form-control" name="idbarang[]" id="">
+                                        @foreach ($barangmentah as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="number" name="jumlah[]" id=""
+                                        placeholder="Masukkan Jumlah Dibeli">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <button type="submit" class="btn btn-rounded btn-primary mr-2">Simpan</button>
                 <a href="{{ route('barangjadi.index') }}" class="btn btn-rounded btn-light">Batal</a>
             </form>
         </div>
     </div>
+    <script>
+        const table = document.querySelector("#tableform");
+        const tbody = table.querySelector("tbody");
+        const tableRow = tbody.querySelector("tr").cloneNode(true);
+
+        function addrow() {
+            tbody.insertAdjacentHTML("beforeend", tableRow.outerHTML)
+
+        }
+    </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barangjadi;
 use Illuminate\Http\Request;
+use App\Models\Barangmentah;
 
 class BarangjadiController extends Controller
 {
@@ -23,8 +24,9 @@ class BarangjadiController extends Controller
      */
     public function create()
     {
-        //
-        return view('barangjadi.add');
+        $data['barangmentah'] = Barangmentah::all();
+        return view('barangjadi.add', $data);
+        
     }
 
     /**

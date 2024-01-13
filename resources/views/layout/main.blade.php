@@ -24,6 +24,8 @@
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.css" rel="stylesheet">
 
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 </head>
 
@@ -52,71 +54,56 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('barangmentah.index') }}">
-                        <i class="mdi mdi-map menu-icon"></i>
+                        <i class="fas fa-hand-holding menu-icon"style="font-size: 14px"></i>
                         <span class="menu-title">Barang Mentah</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('barangjadi.index') }}">
-                        <i class="mdi mdi-memory menu-icon"></i>
+                        <i class="fas fa-hand-holding menu-icon" style="font-size: 14px"></i>
                         <span class="menu-title">Barang Jadi</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('penjualan.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-money-check menu-icon"style="font-size: 14px"></i>
                         <span class="menu-title">Penjualan</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('pembelian.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-shopping-cart menu-icon " style="font-size: 14px"></i>
                         <span class="menu-title">Pembelian</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('pengantaran.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-truck-loading menu-icon" style="font-size: 14px"></i>
                         <span class="menu-title">Pengantaran</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('sopir.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-tachometer-alt menu-icon"style="font-size: 14px"></i>
                         <span class="menu-title">Sopir</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('penjual.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-user-friends menu-icon"style="font-size: 14px"></i>
                         <span class="menu-title">Penjual</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('pembeli.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-user menu-icon"style="font-size: 19px"></i>
                         <span class="menu-title">Pembeli</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('truk.index') }}">
-                        <i class="mdi mdi-account-multiple-plus
-                        menu-icon"></i>
+                        <i class="fas fa-truck menu-icon" style="font-size: 14px"></i>
                         <span class="menu-title">Truk</span>
-                    </a>
-                </li>
-
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="http://www.bootstrapdash.com/demo/spica/template/">
-                        <button class="btn bg-danger btn-sm menu-title">Upgrade to pro</button>
                     </a>
                 </li>
             </ul>
@@ -136,7 +123,7 @@
                         <a class="navbar-brand brand-logo-mini" href="index.html"><img
                                 src="{{ url('images/logo-mini.svg') }}" alt="logo" /></a>
                     </div>
-                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back,
+                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1" >Welcome back, {{ Auth::user()->name }}
                     </h4>
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item">
@@ -262,7 +249,7 @@
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
                                 id="profileDropdown">
                                 <img src="{{ url('images/faces/face5.jpg') }}" alt="profile" />
-                                <span class="nav-profile-name"></span>
+                                <span class="nav-profile-name">{{ Auth::user()->name }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                 aria-labelledby="profileDropdown">

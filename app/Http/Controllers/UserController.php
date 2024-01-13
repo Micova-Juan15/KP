@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,12 +37,13 @@ class UserController extends Controller
         //     'plat' => 'required|min:6|max:12',
         // ]);
         $user = new User();
-        $user->nama = $request->nama;
+        $user->name = $request->name;
         $user->email = $request->email;
+        $user->password = Hash::make($request->password);       
         $user->jabatan = $request->jabatan;
         $user->save();
         // redirect ke user.index
-        return redirect()->route('user.index')->with('success', $request->nama_user . ' berhasil disimpan.');
+        return redirect()->route('user.index')->with('success', $request->name . ' berhasil disimpan.');
     }
 
     /**
@@ -67,10 +69,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate($request, [
-            'plat' => 'required|min:6|max:12',
-        ]);
-        $user->plat = $request->plat;
+        // $this->validate($request, [
+        //     'plat' => 'required|min:6|max:12',
+        // ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);       
+        $user->jabatan = $request->jabatan;
         $user->save();
         return redirect()->route('user.index')->with('success', $request->nama_user . ' berhasil disimpan.');
     }
@@ -82,6 +87,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', $user->nama . ' berhasil dihapus.');
+        return redirect()->route('user.index')->with('success', $user->name . ' berhasil dihapus.');
     }
 }
