@@ -11,6 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('truks', function (Blueprint $table) {
+            $table->boolean('ketersediaan')->default(1);
             $table->id();
             $table->string('plat',12);
             $table->timestamps();

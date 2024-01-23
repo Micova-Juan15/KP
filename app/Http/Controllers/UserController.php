@@ -36,6 +36,12 @@ class UserController extends Controller
         // $this->validate($request, [
         //     'plat' => 'required|min:6|max:12',
         // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required',
+        ]);
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -72,6 +78,12 @@ class UserController extends Controller
         // $this->validate($request, [
         //     'plat' => 'required|min:6|max:12',
         // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required',
+        ]);
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);       

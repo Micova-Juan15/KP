@@ -23,9 +23,9 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="jumlah">Jumlah</label>
-                    <input type="number" class="form-control" name="jumlah" placeholder="Tambah Jumlah"
-                        value="{{ old('jumlah') }}">
+                    <label for="jumlahbarang">Jumlah</label>
+                    <input type="number" class="form-control" name="jumlahbarang" placeholder="Tambah Jumlah"
+                        value="{{ old('jumlahbarang') }}">
                     @error('jumlah')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -42,14 +42,16 @@
                     <button class="btn btn-success" type="button" onclick="addrow( )">
                         Tambah
                     </button>
-                    <table id="tableform">
+                    <table id="tableform" width="100%">
                         <thead>
                             <tr>
-                                <th>
+                                <th  >
                                     Barang Mentah
                                 </th>
                                 <th>
                                     Jumlah
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                         </thead>
@@ -60,13 +62,19 @@
                                         @foreach ($barangmentah as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->nama }}
+                                                ({{ $item->satuan }})
                                             </option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" name="jumlah[]" id=""
-                                        placeholder="Masukkan Jumlah Dibeli">
+                                    <input class="form-control" type="number" name="jumlah[]" id="" required step="any"
+                                        placeholder="Masukkan Jumlah ">
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )" >
+                                        Hapus
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

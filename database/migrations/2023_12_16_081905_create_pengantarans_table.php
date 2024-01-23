@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('pengantarans', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status')->default(1);
             $table->dateTime('tanggal');
+            $table->integer('ongkir')->default(0);
             $table->unsignedBigInteger('idpenjualan');
             $table->unsignedBigInteger('idsopir');
             $table->unsignedBigInteger('idtruk');

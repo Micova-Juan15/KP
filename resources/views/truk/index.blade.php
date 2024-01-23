@@ -16,6 +16,7 @@
                             <th>
                                 Plat Truk
                             </th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,15 +25,20 @@
 
                             <td>
                                 {{$item->plat}}
+                                
                             </td>
+                            <td>{{$item->ketersediaan ?'Tersedia':'Tidak Tersedia'}} </td>
+
                             <td>
                                 <div class="d-flex gap-10">
                                     <a href="{{ route('truk.edit',['truk'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                    @can('delete', App\Models\Truk::class)
                                     <form action="{{ route('truk.destroy',['truk'=>$item])}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                     </form>
+                                    @endcan
                                     </div>
 
                             </td>

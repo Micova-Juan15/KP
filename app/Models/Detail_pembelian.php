@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Detail_pembelian extends Model
 {
     use HasFactory;
+    public function barangmentah()
+    {
+        return $this->belongsTo(Barangmentah::class,'idbarang');
+    }
 }

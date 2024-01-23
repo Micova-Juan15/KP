@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idbarang');
             $table->integer('jumlah');
-            $table->string('hargabeli');
+            $table->integer('hargabeli');
             $table->unsignedBigInteger('idpembelian');
-            $table->foreign('idpembelian')->references('id')->on('pembelians');
-            $table->foreign('idbarang')->references('id')->on('barangmentahs');
+            $table->foreign('idpembelian')->references('id')->on('pembelians') ->onDelete('cascade');
+            $table->foreign('idbarang')->references('id')->on('barangmentahs') ->onDelete('cascade');
             $table->timestamps();
         });
     }

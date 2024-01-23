@@ -11,9 +11,11 @@ use App\Http\Controllers\trukController;
 use App\Http\Controllers\SopirController;
 use App\Http\Controllers\PengantaranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Barangjadi;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +29,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -59,6 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/barangjadi/{barangjadi}/edit', [BarangjadiController::class, 'edit'])->name('barangjadi.edit');
     Route::patch('/barangjadi/{barangjadi}', [BarangjadiController::class, 'update'])->name('barangjadi.update');
     Route::delete('/barangjadi/{barangjadi}', [BarangjadiController::class, 'destroy'])->name('barangjadi.destroy');
+    Route::get('/barangjadi/detail/{barangjadi}', [BarangjadiController::class, 'show'])->name('barangjadi.show');
+    Route::get('/barangjadi/convert', [BarangjadiController::class, 'convert'])->name('barangjadi.convert');
+    Route::post('/barangjadi/tambahbarangjadi', [BarangjadiController::class, 'tambahbarangjadi'])->name('barangjadi.tambahbarangjadi');
 
     Route::get('/barangmentah', [BarangmentahController::class, 'index'])->name('barangmentah.index');
     Route::get('/barangmentah/create', [BarangmentahController::class, 'create'])->name('barangmentah.create');
@@ -73,12 +78,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/pembelian/{pembelian}/edit', [PembelianController::class, 'edit'])->name('pembelian.edit');
     Route::patch('/pembelian/{pembelian}', [PembelianController::class, 'update'])->name('pembelian.update');
     Route::delete('/pembelian/{pembelian}', [PembelianController::class, 'destroy'])->name('pembelian.destroy');
+    Route::get('/pembelian/detail/{pembelian}', [PembelianController::class, 'show'])->name('pembelian.show');
+
 
     Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
     Route::get('/penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');
     Route::post('/penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
-    Route::patch('/penjualan/{penjualan}', [PenjualanController::class, 'update'])->name('penjualan.update');
+    Route::get('/penjualan/{penjualan}/edit', [PenjualanController::class, 'edit'])->name('penjualan.edit');
     Route::delete('/penjualan/{penjualan}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+    Route::patch('/penjualan/{penjualan}', [PenjualanController::class, 'update'])->name('penjualan.update');
+    Route::get('/penjualan/detail/{penjualan}', [PenjualanController::class, 'show'])->name('penjualan.show');
+
 
     Route::get('/pembeli', [PembeliController::class, 'index'])->name('pembeli.index');
     Route::get('/pembeli/create', [PembeliController::class, 'create'])->name('pembeli.create');
@@ -96,9 +106,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pengantaran', [PengantaranController::class, 'index'])->name('pengantaran.index');
     Route::get('/pengantaran/create', [PengantaranController::class, 'create'])->name('pengantaran.create');
+    Route::get('/pengantaran/cetak/{pengantaran}', [PengantaranController::class, 'cetak'])->name('pengantaran.cetak');
+    Route::get('/pengantaran/{pengantaran}/edit', [PengantaranController::class, 'edit'])->name('pengantaran.edit');
     Route::post('/pengantaran/store', [PengantaranController::class, 'store'])->name('pengantaran.store');
     Route::patch('/pengantaran/{pengantaran}', [PengantaranController::class, 'update'])->name('pengantaran.update');
     Route::delete('/pengantaran/{pengantaran}', [PengantaranController::class, 'destroy'])->name('pengantaran.destroy');
+    Route::post('/pengantaran/selesaikan/{pengantaran}', [PengantaranController::class, 'selesaikan'])->name('pengantaran.selesaikan');
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -106,6 +119,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    
+    
+
+
 });
 
 

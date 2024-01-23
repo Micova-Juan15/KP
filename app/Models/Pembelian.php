@@ -12,5 +12,9 @@ class Pembelian extends Model
     {
         return $this->belongsTo(Penjual::class,'idpenjual');
     }
+    public function detailpembelian()
+    {
+        return $this->hasMany(Detail_pembelian::class,'idpembelian','id');
+    }
 
 }

@@ -15,22 +15,26 @@
                             <th>
                                 Nama
                             </th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sopir as $item)
                             <tr>
                                 <td>{{ $item->nama }}</td>
+                                <td>{{$item->ketersediaan ?'Tersedia':'Tidak Tersedia'}} </td>
                                 <td>
                                     <div class="d-flex gap-10">
                                         <a href="{{ route('sopir.edit', ['sopir' => $item]) }}" type="button"
                                             class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                            @can('delete', App\Models\Sopir::class)
                                         <form action="{{ route('sopir.destroy', ['sopir' => $item]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                         </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

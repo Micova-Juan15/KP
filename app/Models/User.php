@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    function isManager() {
+        return $this->jabatan == "Manager";
+    }
+
+    function isKaryawan() {
+        return $this->jabatan == "Karyawan";
+    }
 }

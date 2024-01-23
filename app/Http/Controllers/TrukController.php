@@ -70,8 +70,13 @@ class TrukController extends Controller
         ]);
         $truk->plat = $request->plat;
         $truk->save();
+        $truk->ketersediaan=$request->ketersediaan;
         return redirect()->route('truk.index')->with('success', $request->nama_truk . ' berhasil disimpan.');
+        $truk->ketersediaan=$request->ketersediaan;
+        $truk->save();
+
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -33,12 +33,14 @@
                                     <div class="d-flex gap-10">
                                         <a href="{{ route('penjual.edit', ['penjual' => $item]) }}" type="button"
                                             class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        <form action="{{ route('penjual.destroy', ['penjual' => $item]) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="btn btn-primary btn-rounded btn-fw">Delete</button>
-                                        </form>
+                                        @can('delete', App\Models\Penjual::class)
+                                            <form action="{{ route('penjual.destroy', ['penjual' => $item]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

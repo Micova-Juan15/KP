@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->integer('hargajual');
             $table->unsignedBigInteger('idpenjualan');
-            $table->foreign('idbarang')->references('id')->on('barangjadis');
-            $table->foreign('idpenjualan')->references('id')->on('penjualans');
+            $table->foreign('idbarang')->references('id')->on('barangjadis')->onDelete('cascade');
+            $table->foreign('idpenjualan')->references('id')->on('penjualans')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('ukuran')->nullable();
-            $table->integer('jumlah');
+            $table->double('jumlah');
             $table->integer('harga');
             $table->timestamps();
         });

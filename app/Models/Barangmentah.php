@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Barangmentah extends Model
 {
     use HasFactory;
+
+
 }

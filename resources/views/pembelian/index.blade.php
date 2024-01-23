@@ -5,12 +5,11 @@
         <div class="card-body">
             <h4 class="card-title">Pembelian</h4>
             <div class="table-responsive">
-                <a href="{{ route('pembelian.create') }}" type="button" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
-
+                <a href="{{ route('pembelian.create') }}" type="button" class="btn btn-primary btn-rounded btn-fw" style="margin-bottom: 10px">Tambah</a>
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table id ="datatable" class="table table-striped">
+                <table id ="datatable" class="table table-striped" >
                     <thead>
                         <tr>
                             <th>
@@ -23,16 +22,19 @@
                                 No.Nota
                             </th>
                             <th>
-                                Harga Beli
-                            </th>
-                            <th>
                                 Ongkir
                             </th>
                             <th>
                                 Potongan
                             </th>
                             <th>
+                                Harga Beli
+                            </th>
+                            <th>
 
+                            </th>
+                            <th>
+                                
                             </th>
 
                         </tr>
@@ -43,18 +45,29 @@
                                 <td>{{ $item->penjual->nama }}</td>
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>
-                                <td>{{ $item->totalharga }}</td>
-                                <td>{{ $item->ongkir }}</td>
-                                <td>{{ $item->potongan }}</td>
+                                <td>{{ number_format($item->ongkir),0 }}</td>
+                                <td>{{ number_format($item->potongan),0 }}</td>
+                                <td>{{ number_format($item->totalharga),0 }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
+                                        @can('update', App\Models\Pembelian::class)
                                     <a href="{{ route('pembelian.edit',['pembelian'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                    @endcan
+                                    @can('delete', App\Models\Pembelian::class)
                                     <form action="{{ route('pembelian.destroy',['pembelian'=>$item])}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                     </form>
+                                    @endcan
                                     </div>
+                                </td>
+                                <td>
+                                    <a href="{{route('pembelian.show',['pembelian'=>$item])}}">
+                                        <button class="btn btn-primary btn-rounded btn-fw" type="button" >
+                                            Detail
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

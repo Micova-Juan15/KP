@@ -17,11 +17,11 @@ return new class extends Migration
             $table->dateTime('tanggal');
             $table->integer('totalharga')->default(0);
             $table->integer('ongkir')->default(0);
-            $table->string('idnota');
+            $table->string('idnota')->unique();
             $table->integer('potongan')->default(0);
             $table->unsignedBigInteger('idpenjual');
             $table->foreign('idpenjual')->references('id')->on('penjuals');
-
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

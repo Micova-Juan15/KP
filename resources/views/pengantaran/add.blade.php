@@ -12,7 +12,7 @@
                     <select class="form-control" name="idpenjualan" id=" ">
                         @foreach ($penjualan as $item)
                         <option value="{{$item->id }}">
-                        {{$item->idnota}} ({{$item->tanggal}})
+                        {{$item->idnota}} ({{$item->tanggal}}) {{$item->nama}}
                         </option>
                         @endforeach
                     </select>

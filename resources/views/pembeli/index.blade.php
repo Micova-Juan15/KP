@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th>
-                                Nama 
+                                Nama
                             </th>
                             <th>
                                 Alamat
@@ -31,12 +31,16 @@
                                 <td>{{ $item->hp }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
-                                    <a href="{{ route('pembeli.edit',['pembeli'=>$item])}}" type="button" class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                    <form action="{{ route('pembeli.destroy',['pembeli'=>$item])}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-primary btn-rounded btn-fw">Delete</button>
-                                    </form>
+                                        <a href="{{ route('pembeli.edit', ['pembeli' => $item]) }}" type="button"
+                                            class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
+                                        @can('delete', App\Models\Pembeli::class)
+                                            <form action="{{ route('pembeli.destroy', ['pembeli' => $item]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-rounded btn-fw">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

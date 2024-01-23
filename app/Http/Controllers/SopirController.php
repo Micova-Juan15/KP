@@ -73,6 +73,8 @@ class SopirController extends Controller
 
         $sopir->nama=$request->nama;
         $sopir-> save();
+        $sopir->ketersediaan=$request->ketersediaan;
+        $sopir->save();
         return redirect()->route('sopir.index')->with('success', $request->nama_sopir.' berhasil disimpan.');
     }
 

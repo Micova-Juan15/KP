@@ -11,13 +11,11 @@
                     <br>
                     <select class="form-control" name="idpembeli" id=" ">
                         @foreach ($pembeli as $item)
-                        <option value="{{$item->id }}">
-                        {{$item->nama}}
-                        </option>
+                            <option value="{{ $item->id }}">
+                                {{ $item->nama }}
+                            </option>
                         @endforeach
                     </select>
-
-
                     @error('idbarang')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -39,21 +37,59 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="ongkir">Ongkir</label>
-                    <input type="number" class="form-control" name="ongkir" placeholder="Masukkan harga ongkir"
-                        value="{{ old('ongkir') }}">
-                    @error('ongkir')
+                    <label for="keterangan">Keterangan</label>
+                    <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan"
+                        value="{{ old('keterangan') }}">
+                    @error('keterangan')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="potongan">Potongan</label>
-                    <input type="number" class="form-control" name="potongan" placeholder="Masukkan potongan"
-                        value="{{ old('potongan') }}">
-                    @error('potongan')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                <input type="checkbox"onclick="ShowHideDiv(this)" name="checkpengantaran">
+                <label for="checkbox">
+                    Apakah anda ingin menambah pengantaran ?
+                </label>
+                <div id="checkbox" style="display: none">
+                    <div class="form-group">
+                        <label for="ongkir">Ongkir</label>
+                        <input type="number" class="form-control" name="ongkir" placeholder="Masukkan biaya pengantaran"
+                            value="{{ old('ongkir') }}">
+                        @error('ongkir')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggalpengantaran">Tanggal Pengataran</label>
+                        <input type="date" class="form-control" name="tanggalpengantaran" placeholder="Masukkan Tanggal "
+                            value="{{ old('tanggalpengantaran') }}">
+                        @error('tanggalpengantaran')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="idsopir">Nama Sopir</label>
+                        <br>
+                        <select class="form-control" name="idsopir" id=" ">
+                            @foreach ($sopir as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="idtruk">Plat Kendaraan</label>
+                        <br>
+                        <select class="form-control" name="idtruk" id=" ">
+                            @foreach ($truk as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->plat }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <button class="btn btn-success" type="button" onclick="addrow()">
                         Tambah
@@ -67,29 +103,48 @@
                                 <th>
                                     Jumlah
                                 </th>
+                                <th style="padding-right: 15px">Harga per item</th>
+
                                 <th>
                                     Harga Jual
                                 </th>
-                                <th></th>
+                                <th>
+
+                                </th>
+                                <th>
+
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="idbarang[]" id="">
+                                    <select name="idbarang[]" id="" class="form-control">
                                         @foreach ($barang as $item)
-                                            <option value="{{$item->id}}">
-                                            {{$item->nama}}
-                                            {{$item->ukuran}}
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->nama }}
+                                                {{ $item->ukuran }}
+                                                
                                             </option>
                                         @endforeach
                                     </select>
                                 </td>
+
                                 <td>
-                                    <input type="number" name="jumlah[]" id="" placeholder="Masukkan Jumlah Dibeli">
+                                    <input type="number" name="jumlah[] " min="1" id=""
+                                        placeholder="Masukkan Jumlah Dibeli " class="form-control">
                                 </td>
                                 <td>
-                                    <input type="number" name="hargajual[]" id="" placeholder="Masukkan Harga Jual">
+                                    1,000,0000
+                                </td>
+                                <td>
+                                    <input type="number" name="hargajual[]" min="1" id=""
+                                        placeholder="Masukkan Harga Jual" class="form-control">
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )">
+                                        Hapus
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -106,11 +161,17 @@
     <script>
         const table = document.querySelector("#tableform");
         const tbody = table.querySelector("tbody");
-        const tableRow =tbody.querySelector("tr").cloneNode(true);
-        function addrow (){
-            tbody.insertAdjacentHTML("beforeend",tableRow.outerHTML)     
+        const tableRow = tbody.querySelector("tr").cloneNode(true);
+
+        function addrow() {
+            tbody.insertAdjacentHTML("beforeend", tableRow.outerHTML)
 
         }
-    </script>
 
+        function ShowHideDiv(chkPassport) {
+            var dvPassport = document.getElementById("checkbox");
+            
+            dvPassport.style.display = chkPassport.checked ? "block" : "none";
+        }
+    </script>
 @endsection

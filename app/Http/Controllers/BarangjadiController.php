@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barangjadi;
 use Illuminate\Http\Request;
 use App\Models\Barangmentah;
+use App\Models\Resep;
 
 class BarangjadiController extends Controller
 {
@@ -37,15 +38,22 @@ class BarangjadiController extends Controller
         $this->validate($request,[
             'nama' => 'required',
             'ukuran' => 'required',
-            'jumlah' => 'required|min:1|numeric',
+            'jumlahbarang' => 'required|min:1|numeric',
             'harga' => 'required|numeric',
          ]);
         $barangjadi= new Barangjadi();
         $barangjadi->nama=$request->nama;
         $barangjadi->ukuran=$request->ukuran;
-        $barangjadi->jumlah=$request->jumlah;
+        $barangjadi->jumlah=$request->jumlahbarang;
         $barangjadi->harga=$request->harga;
         $barangjadi->save();
+        for ($i=0; $i < count($request->idbarang); $i++) { 
+            $resep = new Resep();
+            $resep->idbarangjadi = $barangjadi->id;
+            $resep->idbarangmentah = $request->idbarang[$i];
+            $resep->jumlah = $request->jumlah[$i];
+            $resep->save();
+        }
         // redirect ke barang.inde;x
         return redirect()->route('barangjadi.index')->with('success', $request->nama_barangjadi.' berhasil disimpan.');
 
@@ -56,7 +64,7 @@ class BarangjadiController extends Controller
      */
     public function show(Barangjadi $barangjadi)
     {
-        //
+        return view('barangjadi.show',compact('barangjadi'));
     }
 
     /**
@@ -66,6 +74,7 @@ class BarangjadiController extends Controller
     {
         $data['barangjadi'] = $barangjadi;
         return view('barangjadi.edit', $data);
+
 
     }
 
@@ -100,4 +109,32 @@ class BarangjadiController extends Controller
         return redirect()->route('barangjadi.index')->with('success', $barangjadi->nama . ' berhasil dihapus.');
 //
     }
+
+    public function convert(Barangjadi $barangjadi)
+    {
+        $data['barangjadi'] = Barangjadi::all();
+        return view('barangjadi.convert',$data);
+    }
+
+    public function tambahbarangjadi(Request $request)
+    {
+        $barangjadi=Barangjadi::find($request->idbarangjadi);
+        $barangjadi->jumlah=$barangjadi->jumlah+$request->jumlah;
+        for ($i=0; $i < count($barangjadi->resep); $i++) { 
+            $barangmentah=Barangmentah::find($barangjadi->resep[$i]->idbarangmentah);
+            $hasil= $barangmentah->jumlah-($barangjadi->resep[$i]->jumlah*$request->jumlah);
+            if($hasil<0)
+            {
+                return redirect()->route('barangjadi.index')->with('warning', $barangmentah->nama.' kekurangan stock');
+
+            }
+            $barangmentah->jumlah=$barangmentah->jumlah-($barangjadi->resep[$i]->jumlah*$request->jumlah);
+            $barangmentah->save();
+        }
+        $barangjadi->save();
+        return redirect()->route('barangjadi.index')->with('success', $request->nama_barangjadi.' berhasil disimpan.');
+    }
+    
+
 }
+

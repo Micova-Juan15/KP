@@ -46,10 +46,10 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="potongan">Potongan</label>
-                    <input type="number" class="form-control" name="potongan" placeholder="Masukkan potongan"
-                        value="{{ old('potongan') }}">
-                    @error('potongan')
+                    <label for="keterangan">Keterangan</label>
+                    <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan"
+                        value="{{ old('keterangan') }}">
+                    @error('keterangan')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -79,15 +79,22 @@
                                         @foreach ($barang as $item)
                                             <option value="{{$item->id}}">
                                             {{$item->nama}}
+                                            
+                                            ({{$item->satuan}})
                                             </option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" name="jumlah[]" id="" placeholder="Masukkan Jumlah Dibeli">
+                                    <input class="form-control" type="number" name="jumlah[]" id="" min="1" placeholder="Masukkan Jumlah Dibeli">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" name="hargabeli[]" id="" placeholder="Masukkan Harga Beli"> 
+                                    <input class="form-control" type="number" name="hargabeli[]" min="1" id="" placeholder="Masukkan Harga Beli"> 
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )" >
+                                        Hapus
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
