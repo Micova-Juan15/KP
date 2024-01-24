@@ -66,6 +66,7 @@
                                 <th>
                                     Jumlah
                                 </th>
+                                <th style="padding-right: 15px">Harga per item</th>
                                 <th>
                                     Harga Beli
                                 </th>
@@ -87,6 +88,9 @@
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" name="jumlah[]" id="" min="1" placeholder="Masukkan Jumlah Dibeli">
+                                </td>
+                                <td class="col-harga-per-item">
+                                    1,000,0000
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" name="hargabeli[]" min="1" id="" placeholder="Masukkan Harga Beli"> 
@@ -114,6 +118,19 @@
             tbody.insertAdjacentHTML("beforeend",tableRow.outerHTML)     
 
         }
+
+        async function getHarga(element) {
+            const idBarang = element.value;
+            const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
+            const data = await response.json();
+            return data.data;
+        }
+
+        function setHarga(element) {
+            const data = getHarga(element)
+            element.closest('.col-harga-per-item').innerHTML = `${data.harga}`
+        }
+
     </script>
 
 @endsection

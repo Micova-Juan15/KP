@@ -48,16 +48,16 @@
                                     {{ $item->barangmentah->nama }}
                                 </td>
                                 <td>
-                                    {{number_format ($item->jumlah),0 }}
+                                    {{number_format ($item->jumlah, 0) }}
                                 </td>
                                 <td>
-                                    {{number_format($item->barangmentah->harga),0}}
+                                    {{number_format($item->barangmentah->harga,0)}}
                                 </td>
                                 <td>
                                     {{number_format(($item->barangmentah->harga*$item->jumlah)-$item->hargabeli,0)}}
                                 </td>
                                 <td>
-                                    {{number_format ($item->hargabeli),0 }}
+                                    {{number_format ($item->hargabeli,0) }}
                                 </td>
                             </tr>
                         @endforeach
@@ -66,7 +66,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                               Sub Total 
+                                Sub Total 
                             </td>
                             <td>{{number_format($pembelian->totalharga-$pembelian->ongkir,0)}}</td>
                         </tr>
@@ -84,7 +84,7 @@
                             <td >
                                 Total 
                             </td>
-                            <td >{{number_format($pembelian->totalharga),0}}</td>
+                            <td >{{number_format($pembelian->totalharga,0)}}</td>
                         </tr>
                     </tbody>
                 </table>

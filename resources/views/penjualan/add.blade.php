@@ -119,7 +119,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="idbarang[]" id="" class="form-control">
+                                    <select name="idbarang[]" id="" class="form-control" onchange="setHarga(this)">
                                         @foreach ($barang as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->nama }}
@@ -134,7 +134,7 @@
                                     <input type="number" name="jumlah[] " min="1" id=""
                                         placeholder="Masukkan Jumlah Dibeli " class="form-control">
                                 </td>
-                                <td>
+                                <td class="col-harga-per-item">
                                     1,000,0000
                                 </td>
                                 <td>
@@ -166,6 +166,18 @@
         function addrow() {
             tbody.insertAdjacentHTML("beforeend", tableRow.outerHTML)
 
+        }
+
+        async function getHarga(element) {
+            const idBarang = element.value;
+            const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
+            const data = await response.json();
+            return data.data;
+        }
+
+        function setHarga(element) {
+            const data = getHarga(element)
+            element.closest('.col-harga-per-item').innerHTML = `${data.harga}`
         }
 
         function ShowHideDiv(chkPassport) {

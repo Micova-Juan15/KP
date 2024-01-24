@@ -49,8 +49,8 @@
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>
                                 <td>{{$item->pengantaran->ongkir?? '0'}} </td>
-                                <td>{{ number_format($item->potongan), 0 }}</td>
-                                <td>{{ number_format($item->totalharga), 0 }}</td>
+                                <td>{{ number_format($item->potongan,0) }}</td>
+                                <td>{{ number_format($item->totalharga,0) }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
                                         @can('update', App\Models\Penjualan::class)

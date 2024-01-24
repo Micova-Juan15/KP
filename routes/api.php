@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\BarangJadiController;
+use App\Http\Controllers\API\BarangMentahController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::controller(BarangJadiController::class)->prefix('/barangjadi')->name('barangjadi.')->group(function () {
+    Route::get('/show/{id}', 'show')->name('show');
+});
+
+Route::controller(BarangMentahController::class)->prefix('/barangmentah')->name('barangmentah.')->group(function () {
+    Route::get('/show/{id}', 'show')->name('show');
 });

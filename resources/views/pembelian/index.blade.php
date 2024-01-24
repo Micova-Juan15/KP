@@ -45,9 +45,9 @@
                                 <td>{{ $item->penjual->nama }}</td>
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>
-                                <td>{{ number_format($item->ongkir),0 }}</td>
-                                <td>{{ number_format($item->potongan),0 }}</td>
-                                <td>{{ number_format($item->totalharga),0 }}</td>
+                                <td>{{ number_format($item->ongkir, 0) }}</td>
+                                <td>{{ number_format($item->potongan, 0) }}</td>
+                                <td>{{ number_format($item->totalharga, 0) }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
                                         @can('update', App\Models\Pembelian::class)
