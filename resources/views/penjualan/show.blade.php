@@ -94,7 +94,7 @@
                             <td >
                                 Total 
                             </td>
-                            <td >{{number_format($penjualan->totalharga+$penjualan->pengantaran->ongkir?? 0 ,0)}}</td>
+                            <td >{{number_format($penjualan->totalharga+($penjualan->pengantaran->ongkir?? 0) ,0)}}</td>
                         </tr>
                     </tbody>
                 </table>
