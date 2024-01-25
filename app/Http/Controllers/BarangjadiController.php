@@ -118,6 +118,7 @@ class BarangjadiController extends Controller
 
     public function tambahbarangjadi(Request $request)
     {
+        
         $barangjadi=Barangjadi::find($request->idbarangjadi);
         $barangjadi->jumlah=$barangjadi->jumlah+$request->jumlah;
         for ($i=0; $i < count($barangjadi->resep); $i++) { 

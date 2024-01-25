@@ -66,8 +66,8 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th style="padding-right: 15px">Harga per item</th>
-                                <th>
+                                <th style="padding-right: 20px">Harga per item</th>
+                                <th style="padding-left: 20px">
                                     Harga Beli
                                 </th>
                                 <th></th>
@@ -75,8 +75,11 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <select class="form-control" name="idbarang[]" id="">
+                                <td style="padding-right: 20px">
+                                    <select class="form-control" name="idbarang[]" id="" onchange="setHarga(this)">
+                                        <option value="-1">
+                                            Pilih barang
+                                        </option>
                                         @foreach ($barang as $item)
                                             <option value="{{$item->id}}">
                                             {{$item->nama}}
@@ -86,16 +89,16 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td>
-                                    <input class="form-control" type="number" name="jumlah[]" id="" min="1" placeholder="Masukkan Jumlah Dibeli">
+                                <td style="padding-right: 20px">
+                                    <input onchange="hitungTotal(this)" class="form-control jumlah" type="number" name="jumlah[]" id="" min="1" placeholder="Masukkan Jumlah Dibeli">
                                 </td>
-                                <td class="col-harga-per-item">
-                                    1,000,0000
+                                <td class="col-harga-per-item form-control" style="padding-right: 20px">
+                                    0
                                 </td>
-                                <td>
-                                    <input class="form-control" type="number" name="hargabeli[]" min="1" id="" placeholder="Masukkan Harga Beli"> 
+                                <td style="padding-left: 20px">
+                                    <input class="form-control totalHarga" type="number" name="hargabeli[]" min="1" id="" placeholder="Masukkan Harga Beli"> 
                                 </td>
-                                <td>
+                                <td style="padding-left: 20px">
                                     <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )" >
                                         Hapus
                                     </button>
@@ -119,16 +122,54 @@
 
         }
 
+        // async function getHarga(element) {
+        //     const idBarang = element.value;
+        //     const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
+        //     const data = await response.json();
+        //     return data.data;
+        // }
+
+        // function setHarga(element) {
+        //     const data = getHarga(element)
+        //     element.closest('.col-harga-per-item').innerHTML = `${data.harga}`
+        // }
         async function getHarga(element) {
-            const idBarang = element.value;
-            const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
-            const data = await response.json();
-            return data.data;
+            // const idBarang = element.value;
+            // const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
+            // const data = await response.json();
+            // return data.data;
+        }
+        async function setHarga(element) {
+            if (element.value != -1) {
+                const idBarang = element.value;
+                const response = await fetch(window.location.origin + "/api/barangmentah/show/" + idBarang);
+                const data = await response.json();
+                const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+                console.log(hargaElement); // Periksa apakah ini mencetak elemen yang benar
+                hargaElement.innerText = `${data.data.harga}`;
+                console.log(data.data);
+
+                const jumlah = element.closest('tr').querySelector('.jumlah').value
+                const totalHarga = element.closest('tr').querySelector('.totalHarga')
+                totalHarga.value = data.data.harga * jumlah
+
+            } else {
+                const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+                hargaElement.innerText = "0"
+
+                const totalHarga = element.closest('tr').querySelector('.totalHarga')
+                totalHarga.value = data.data.harga * jumlah
+            }
         }
 
-        function setHarga(element) {
-            const data = getHarga(element)
-            element.closest('.col-harga-per-item').innerHTML = `${data.harga}`
+        function hitungTotal(element) {
+            const jumlah = element.closest('tr').querySelector('.jumlah').value
+            const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+
+
+
+            const totalHarga = element.closest('tr').querySelector('.totalHarga')
+            totalHarga.value = parseInt(hargaElement.innerText) * jumlah
         }
 
     </script>

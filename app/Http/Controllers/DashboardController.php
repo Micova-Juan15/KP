@@ -19,18 +19,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        
+
         $data['pembelian'] = Pembelian::all();
 
         $data['penjualan'] = Penjualan::all();
 
         $data['pengantaranbelumselesai'] = Pengantaran::where('status', 0)
-        ->get();
+            ->get();
 
         $data['pengantaran'] = Pengantaran::all();
 
         $data['pengantaransudahselesai'] = Pengantaran::where('status', 1)
-        ->get();
+            ->get();
         $data['barangmentah'] = Barangmentah::all();
         $data['barangjadi'] = Barangjadi::all();
         $data['sopir'] = Sopir::all();
@@ -38,9 +38,19 @@ class DashboardController extends Controller
         $data['pembeli'] = Pembeli::all();
         $data['truk'] = Truk::all();
         $data['user'] = User::all();
-        $tahun=date("Y");
-        $data['grafik']= DB::select("SELECT substr(tanggal, 6, 2) as bulan, sum(totalharga) as totalharga FROM `penjualans` WHERE LEFT(tanggal, 4) = $tahun GROUP by substr(tanggal, 6, 2);");
+        // $tahun=date("Y");
+        // $data['grafik']= DB::select("SELECT substr(tanggal, 6, 2) as bulan, sum(totalharga) as totalharga FROM `penjualans` WHERE LEFT(tanggal, 4) = $tahun GROUP by substr(tanggal, 6, 2);");
+        // return view('dashboard', $data);
+        $tahun = date("Y");
+        $data['grafik'] = DB::select("
+            SELECT 
+                MONTH(tanggal) as bulan, 
+                COALESCE(SUM(totalharga), 0) as totalharga 
+            FROM `penjualans` 
+            WHERE YEAR(tanggal) = $tahun 
+            GROUP BY MONTH(tanggal)
+            ORDER BY MONTH(tanggal);
+        ");
         return view('dashboard', $data);
-
     }
 }

@@ -94,8 +94,8 @@
                     <button class="btn btn-success" type="button" onclick="addrow()">
                         Tambah
                     </button>
-                    <table id="tableform">
-                        <thead>
+                    <table id="tableform" >
+                        <thead >
                             <tr>
                                 <th>
                                     Barang Jadi
@@ -103,9 +103,9 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th style="padding-right: 15px">Harga per item</th>
+                                <th style="padding-right: 20px" >Harga per item</th>
 
-                                <th>
+                                <th style="padding-left: 20px">
                                     Harga Jual
                                 </th>
                                 <th>
@@ -118,30 +118,34 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
+                                <td style="padding-right: 20px">
                                     <select name="idbarang[]" id="" class="form-control" onchange="setHarga(this)">
+                                        <option value="-1">
+                                            Pilih barang
+                                        </option>
                                         @foreach ($barang as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->nama }}
                                                 {{ $item->ukuran }}
-                                                
+
                                             </option>
                                         @endforeach
                                     </select>
                                 </td>
 
-                                <td>
+                                <td style="padding-right: 20px">
                                     <input type="number" name="jumlah[] " min="1" id=""
-                                        placeholder="Masukkan Jumlah Dibeli " class="form-control">
+                                        onchange="hitungTotal(this)" placeholder="Masukkan Jumlah Dibeli "
+                                        class="form-control jumlah">
                                 </td>
-                                <td class="col-harga-per-item">
-                                    1,000,0000
+                                <td style="padding-right: 20px" class="col-harga-per-item form-control" >
+                                    0
                                 </td>
-                                <td>
+                                <td style="padding-left: 20px">
                                     <input type="number" name="hargajual[]" min="1" id=""
-                                        placeholder="Masukkan Harga Jual" class="form-control">
+                                        placeholder="Masukkan Harga Jual" class="form-control totalHarga">
                                 </td>
-                                <td>
+                                <td style="padding-right: 20px">
                                     <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )">
                                         Hapus
                                     </button>
@@ -169,20 +173,59 @@
         }
 
         async function getHarga(element) {
-            const idBarang = element.value;
-            const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
-            const data = await response.json();
-            return data.data;
+            // const idBarang = element.value;
+            // const response = await fetch(window.location.origin+"/api/barangmentah/show/"+idBarang+"/");
+            // const data = await response.json();
+            // return data.data;
+        }
+        async function setHarga(element) {
+            if (element.value != -1) {
+                const idBarang = element.value;
+                const response = await fetch(window.location.origin + "/api/barangjadi/show/" + idBarang);
+                const data = await response.json();
+                const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+                console.log(hargaElement); // Periksa apakah ini mencetak elemen yang benar
+                hargaElement.innerText = `${data.data.harga}`;
+                console.log(data.data);
+
+                const jumlah = element.closest('tr').querySelector('.jumlah').value
+                const totalHarga = element.closest('tr').querySelector('.totalHarga')
+                totalHarga.value = data.data.harga * jumlah
+
+            } else {
+                const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+                hargaElement.innerText = "0"
+
+                const totalHarga = element.closest('tr').querySelector('.totalHarga')
+                totalHarga.value = data.data.harga * jumlah
+            }
         }
 
-        function setHarga(element) {
-            const data = getHarga(element)
-            element.closest('.col-harga-per-item').innerHTML = `${data.harga}`
+        function hitungTotal(element) {
+            const jumlah = element.closest('tr').querySelector('.jumlah').value
+            const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+
+
+
+            const totalHarga = element.closest('tr').querySelector('.totalHarga')
+            totalHarga.value = parseInt(hargaElement.innerText) * jumlah
         }
+
+
+        // async function setHarga(element) {
+        //     const idBarang = element.value;
+        //     const response = await fetch(window.location.origin + "/api/barangmentah/show/" + idBarang);
+        //     const data = await response.json();
+        //     const hargaElement = element.closest('tr').querySelector('.col-harga-per-item');
+        //     console.log(hargaElement); // Periksa apakah ini mencetak elemen yang benar
+        //     hargaElement.innerText = `${data.data.harga}`;
+        //     console.log(data.data);
+        // }
+
 
         function ShowHideDiv(chkPassport) {
             var dvPassport = document.getElementById("checkbox");
-            
+
             dvPassport.style.display = chkPassport.checked ? "block" : "none";
         }
     </script>

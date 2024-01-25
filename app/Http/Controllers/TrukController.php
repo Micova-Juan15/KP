@@ -69,11 +69,10 @@ class TrukController extends Controller
             'plat' => 'required|min:6|max:12',
         ]);
         $truk->plat = $request->plat;
-        $truk->save();
         $truk->ketersediaan=$request->ketersediaan;
+        $truk->save();
         return redirect()->route('truk.index')->with('success', $request->nama_truk . ' berhasil disimpan.');
-        $truk->ketersediaan=$request->ketersediaan;
-        $truk->save();
+
 
     }
     

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('tanggal');
             $table->unsignedBigInteger('idpembeli');
-            $table->unsignedBigInteger('idnota');
+            $table->string('idnota')->unique();
             $table->integer('totalharga');
             $table->integer('potongan')->default(0);
             $table->foreign('idpembeli')->references('id')->on('pembelis');

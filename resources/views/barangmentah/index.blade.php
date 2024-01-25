@@ -25,7 +25,7 @@
                                 Jumlah
                             </th>
                             <th>
-                                Harga
+                                Harga Satuan
                             </th>
                             <th>
 

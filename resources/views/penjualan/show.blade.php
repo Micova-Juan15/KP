@@ -74,14 +74,18 @@
                             <td>
                                 Sub Total 
                             </td>
-                            <td>{{number_format($penjualan->totalharga-$penjualan->ongkir,0)}}</td>
+                            {{-- <td>{{number_format($penjualan->totalharga-$penjualan->ongkir,0)}}</td> --}}
+                            <td>{{ number_format(($penjualan->totalharga - ($penjualan->ongkir ?? 0)), 0) }}</td>
+
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td >Ongkir</td>
-                            <td>{{number_format($penjualan->pengantaran->ongkir?? 0)}} </td>
+                            {{-- <td>{{number_format($penjualan->pengantaran->ongkir?? 0)}} </td> --}}
+                            {{-- <td>{{ number_format(($penjualan->pengantaran->ongkir ?? 0), 0) }}</td> --}}
+                            <td>{{ number_format(($penjualan->pengantaran->ongkir ?? 0), 0) }}</td>
                         </tr>
                         <tr>
                             <td></td>

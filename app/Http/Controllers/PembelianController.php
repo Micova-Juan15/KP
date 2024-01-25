@@ -37,6 +37,12 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tanggal' => 'required|date',
+            // 'ongkir' => 'required|numeric',
+            'idnota' => 'required ',
+            'idpenjual' => 'required',
+        ]);
         // $this->validate($request,[
         //     'tanggal' => 'required|date',
         // 'totalharga' => 'required|min:0',
@@ -111,6 +117,16 @@ class PembelianController extends Controller
         //     'idnota' => 'required',
         //     'ongkir' => 'required|numeric',
         // ]);
+        $request->validate([
+            'tanggal' => 'required|date',
+            'ongkir' => 'required|numeric',
+            'idnota' => 'required',
+            'idpenjual' => 'required',
+            'iddetail.*' => 'required|numeric',
+            'idbarang.*' => 'required|numeric',
+            'jumlah.*' => 'required|numeric|min:1',
+            'hargabeli.*' => 'required|numeric|min:0',
+        ]);
         $pembelian->tanggal = $request->tanggal;
         $pembelian->idpenjual = $request->idpenjual;
         $pembelian->idnota = $request->idnota;
