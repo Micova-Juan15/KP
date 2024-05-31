@@ -16,6 +16,7 @@
                 <table id ="datatable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>
                                 Pembeli
                             </th>
@@ -45,6 +46,7 @@
                     <tbody>
                         @foreach ($penjualan as $item)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->pembeli->nama }}</td>
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>

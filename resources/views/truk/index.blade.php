@@ -10,18 +10,21 @@
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id="datatable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>
                                 Plat Truk
                             </th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($truk as $item)
                         <tr>
+                            <td>{{$loop->iteration}}</td>
 
                             <td>
                                 {{$item->plat}}

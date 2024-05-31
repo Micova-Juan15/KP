@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ url('images/foto/logo.jpeg') }}" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link href="{{ asset('css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
     {{-- <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"> --}}
     {{-- <script src="{{ asset('js/datatables.min.js') }}"></script> --}}
-    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.css" rel="stylesheet">
+    <link href="{{asset('css/datatables.min.css')}}" rel="stylesheet">
 
-    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/r-2.5.0/datatables.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="{{asset('js/datatables.min.js')}}"></script>
+    <link rel="stylesheet" href="{{asset ('fontawesome-free-5.15.4-web/css/all.css')}}"  />
+    {{-- font awesome --}}
 
 
 </head>

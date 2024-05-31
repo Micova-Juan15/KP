@@ -6,8 +6,8 @@
             <h4 class="card-title">Bahan Mentah</h4>
             <div class="table-responsive">
                 @can('create', App\Models\Barangmentah::class)
-                    <a href="{{ route('barangmentah.create') }}" type="button"
-                        class="btn btn-primary btn-rounded btn-fw">Tambah List Item Baru</a>
+                    <a href="{{ route('barangmentah.create') }}" type="button" class="btn btn-primary btn-rounded btn-fw">Tambah
+                        List Item Baru</a>
                 @endcan
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
@@ -15,6 +15,7 @@
                 <table id="datatable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>
                                 Nama
                             </th>
@@ -35,10 +36,13 @@
                     <tbody>
                         @foreach ($barangmentah as $item)
                             <tr>
+                                <td>
+                                    {{ $loop->iteration }}
+                                </td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->satuan }}</td>
-                                <td>{{ number_format( $item->jumlah,1) }}</td>
-                                <td>{{ number_format( $item->harga,0) }}</td>
+                                <td>{{ number_format($item->jumlah, 1) }}</td>
+                                <td>{{ number_format($item->harga, 0) }}</td>
                                 <td>
                                     <div class="d-flex gap-10">
                                         @can('update', App\Models\Barangmentah::class)

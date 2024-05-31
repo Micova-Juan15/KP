@@ -13,6 +13,7 @@
                 <table id ="datatable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>
                                 Nama
                             </th>
@@ -31,6 +32,7 @@
                     <tbody>
                         @foreach ($user as $item)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->jabatan }}</td>
                                 <td>{{ $item->email }}</td>

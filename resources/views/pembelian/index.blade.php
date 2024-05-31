@@ -17,6 +17,9 @@
                     <thead>
                         <tr>
                             <th>
+                                No
+                            </th>
+                            <th>
                                 Penjual
                             </th>
                             <th>
@@ -46,6 +49,7 @@
                     <tbody>
                         @foreach ($pembelian as $item)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->penjual->nama }}</td>
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>

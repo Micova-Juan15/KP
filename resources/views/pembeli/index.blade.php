@@ -9,9 +9,12 @@
                 @if (Session::get('success'))
                     <div class="alert alert-success mt-3">{{ Session::get('success') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table id="datatable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>
+                                No
+                            </th>
                             <th>
                                 Nama
                             </th>
@@ -21,11 +24,13 @@
                             <th>
                                 No Handphone
                             </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pembeli as $item)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->hp }}</td>

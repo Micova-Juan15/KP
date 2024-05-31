@@ -30,6 +30,9 @@
                     <thead>
                         <tr>
                             <th>
+                                No
+                            </th>
+                            <th>
                                 Nama
                             </th>
                             <th>
@@ -52,6 +55,7 @@
                     <tbody>
                         @foreach ($barangjadi as $item)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ number_format($item->jumlah, 0) }}</td>

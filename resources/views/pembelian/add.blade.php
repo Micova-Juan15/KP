@@ -66,7 +66,7 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th style="padding-right: 20px">Harga per item</th>
+                                <th style="padding-right: 20px">Harga per satuan</th>
                                 <th style="padding-left: 20px">
                                     Harga Beli
                                 </th>

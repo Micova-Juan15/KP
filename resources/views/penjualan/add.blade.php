@@ -103,7 +103,7 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th style="padding-right: 20px" >Harga per item</th>
+                                <th style="padding-right: 20px" >Harga per satuan</th>
 
                                 <th style="padding-left: 20px">
                                     Harga Jual
@@ -135,7 +135,7 @@
 
                                 <td style="padding-right: 20px">
                                     <input type="number" name="jumlah[] " min="1" id=""
-                                        onchange="hitungTotal(this)" placeholder="Masukkan Jumlah Dibeli "
+                                        onchange="hitungTotal(this)" placeholder="Masukkan Jumlah Dijual "
                                         class="form-control jumlah">
                                 </td>
                                 <td style="padding-right: 20px" class="col-harga-per-item form-control" >

@@ -29,6 +29,7 @@
                                 <th>
                                     Barang Mentah
                                 </th>
+                                <th>Satuan</th>
                                 <th>
                                     Jumlah
                                 </th>
@@ -39,7 +40,9 @@
                             <tr>
                                 <td>
                                     {{$item->barangmentah->nama}}
+
                                 </td>
+                                <td>{{$item->barangmentah->satuan}}</td>
                                 
                                 <td>
                                     {{$item->jumlah}}
