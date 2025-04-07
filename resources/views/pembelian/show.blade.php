@@ -30,34 +30,40 @@
                             <th>
                                 Jumlah
                             </th>
-                            <th>
+                            {{-- <th>
                                 Harga Satuan
-                            </th>
-                            <th>
+                            </th> --}}
+                            {{-- <th>
                                 Potongan
-                            </th>
+                            </th> --}}
                             <th>
-                                Total Harga Nego
+                                Harga
                             </th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalqty=0;
+                        @endphp
                         @foreach ($pembelian->detailpembelian as $item)
                             <tr>
                                 <td>
                                     {{ $item->barangmentah->nama }}
                                 </td>
                                 <td>
-                                    {{number_format ($item->jumlah, 0) }}
+                                    {{number_format ($item->jumlah),0 }}
                                 </td>
-                                <td>
-                                    {{number_format($item->barangmentah->harga,0)}}
-                                </td>
-                                <td>
+                                @php
+                                    $totalqty +=$item->jumlah;
+                                @endphp
+                                {{-- <td>
+                                    {{number_format($item->barangmentah->harga),0}}
+                                </td> --}}
+                                {{-- <td>
                                     {{number_format(($item->barangmentah->harga*$item->jumlah)-$item->hargabeli,0)}}
-                                </td>
+                                </td> --}}
                                 <td>
-                                    {{number_format ($item->hargabeli,0) }}
+                                    {{number_format ($item->hargabeli),0 }}
                                 </td>
                             </tr>
                         @endforeach
@@ -65,26 +71,35 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                        </tr>
+                        <tr>
+                            {{-- <td></td>
+                            <td></td> --}}
                             <td>
-                                Sub Total 
+                               Sub Total 
+                            </td>
+                            <td>
+                                
                             </td>
                             <td>{{number_format($pembelian->totalharga-$pembelian->ongkir,0)}}</td>
                         </tr>
                         <tr>
+                            {{-- <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td></td> --}}
                             <td >Ongkir</td>
+                            <td></td>
                             <td>{{number_format($pembelian->ongkir)}} </td>
                         </tr>
                         <tr>
+                            {{-- <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td></td> --}}
                             <td >
                                 Total 
                             </td>
-                            <td >{{number_format($pembelian->totalharga,0)}}</td>
+                            <td>{{$totalqty}}</td>
+                            <td >{{number_format($pembelian->totalharga),0}}</td>
                         </tr>
                     </tbody>
                 </table>

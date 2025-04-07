@@ -84,28 +84,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sopir.index') }}">
-                        <i class="fas fa-tachometer-alt menu-icon"style="font-size: 14px"></i>
-                        <span class="menu-title">Sopir</span>
+                    <a class="nav-link" data-toggle="collapse" href="#dataMasterMenu" aria-expanded="false"
+                        aria-controls="dataMasterMenu">
+                        <i class="fas fa-database menu-icon" style="font-size: 14px"></i>
+                        <span class="menu-title">Data Master</span>
+                        <i class="menu-arrow"></i>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('penjual.index') }}">
-                        <i class="fas fa-user-friends menu-icon"style="font-size: 14px"></i>
-                        <span class="menu-title">Penjual</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('pembeli.index') }}">
-                        <i class="fas fa-user menu-icon"style="font-size: 19px"></i>
-                        <span class="menu-title">Pembeli</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('truk.index') }}">
-                        <i class="fas fa-truck menu-icon" style="font-size: 14px"></i>
-                        <span class="menu-title">Truk</span>
-                    </a>
+                    <div class="collapse" id="dataMasterMenu">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('sopir.index') }}">Sopir</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('penjual.index') }}">Penjual</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('pembeli.index') }}">Pembeli</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('truk.index') }}">Truk</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </nav>
