@@ -56,7 +56,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('barangmentah.index') }}">
                         <i class="fas fa-hand-holding menu-icon"style="font-size: 14px"></i>
-                        <span class="menu-title">Barang Mentah</span>
+                        <span class="menu-title">Bahan Mentah</span>
                     </a>
                 </li>
                 <li class="nav-item">
