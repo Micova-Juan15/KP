@@ -12,7 +12,6 @@ class BarangmentahController extends Controller
      */
     public function index()
     {
-
         $data['barangmentah'] = Barangmentah::all();
         // dd($data['barang']);
         return view('barangmentah.index', $data);
@@ -30,22 +29,49 @@ class BarangmentahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'nama' => 'required',
+    //         // 'jumlah' => 'required|min:1|numeric',
+    //         'jumlah' => 'required|numeric|gt:0',
+    //         'satuan' => 'required',
+    //         // 'harga' => 'required|numeric',
+    //     ]);
+
+    //     $barangmentah = new Barangmentah();
+    //     $barangmentah->nama = $request->nama;
+    //     $barangmentah->jumlah = $request->jumlah;
+    //     $barangmentah->satuan = $request->satuan;
+    //     // $barangmentah->harga = $request->harga;
+    //     $barangmentah->harga = $request->harga ?? 0;
+    //     $barangmentah->save();
+    //     return redirect()->route('barangmentah.index')->with('success', $request->nama_barangmentah . ' berhasil disimpan.');
+    // }
     public function store(Request $request)
     {
+        // Normalisasi input desimal
+        $request->merge([
+            'jumlah' => str_replace(',', '.', $request->jumlah),
+            // 'harga' => str_replace(',', '.', $request->harga),
+        ]);
+
         $this->validate($request, [
             'nama' => 'required',
-            'jumlah' => 'required|min:1|numeric',
+            'jumlah' => 'required|numeric|gt:0',
             'satuan' => 'required',
-            'harga' => 'required|numeric',
         ]);
 
         $barangmentah = new Barangmentah();
         $barangmentah->nama = $request->nama;
         $barangmentah->jumlah = $request->jumlah;
         $barangmentah->satuan = $request->satuan;
-        $barangmentah->harga = $request->harga;
+        $barangmentah->harga = $request->harga ?? 0;
         $barangmentah->save();
-        return redirect()->route('barangmentah.index')->with('success', $request->nama_barangmentah . ' berhasil disimpan.');
+
+        return redirect()
+            ->route('barangmentah.index')
+            ->with('success', $request->nama . ' berhasil disimpan.');
     }
 
     /**
@@ -70,28 +96,33 @@ class BarangmentahController extends Controller
      */
     public function update(Request $request, Barangmentah $barangmentah)
     {
+        $request->merge([
+            'jumlah' => str_replace(',', '.', $request->jumlah),
+            // 'harga' => str_replace(',', '.', $request->harga),
+        ]);
+
         $this->validate($request, [
             'nama' => 'required',
-            'jumlah' => 'required|min:1',
+            'jumlah' => 'required|numeric|gt:0',
             'satuan' => 'required',
-            'harga' => 'required',
+            // 'harga' => 'required|numeric',
         ]);
+
         $barangmentah->nama = $request->nama;
         $barangmentah->jumlah = $request->jumlah;
         $barangmentah->satuan = $request->satuan;
-        $barangmentah->harga = $request->harga;
+        // $barangmentah->harga = $request->harga;
         $barangmentah->save();
 
-        return redirect()->route('barangmentah.index')->with('success', $request->nama_barangmentah . ' berhasil diperbarui.');
+        return redirect()
+            ->route('barangmentah.index')
+            ->with('success', $request->nama . ' berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Barangmentah $barangmentah)
     {
         $barangmentah->delete();
 
-        return redirect()->route('barangmentah.index')->with('success', $barangmentah->nama . ' berhasil dihapus.');
+        return redirect()->route('barangmentah.index')->with('success', 'Barang mentah berhasil dihapus.');
     }
 }

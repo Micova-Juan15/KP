@@ -68,20 +68,20 @@ class PembelianController extends Controller
             $detailpembelian->idpembelian = $pembelian->id;
             $detailpembelian->idbarang = $request->idbarang[$i];
             $detailpembelian->jumlah = $request->jumlah[$i];
-            $detailpembelian->hargabeli = $request->hargabeli[$i];
+            // $detailpembelian->hargabeli = $request->hargabeli[$i];
             $detailpembelian->save();
             $barangmentah = Barangmentah::find($request->idbarang[$i]);
             $barangmentah->jumlah = $barangmentah->jumlah + $request->jumlah[$i];
             $barangmentah->save();
 
 
-            $totalharga += ($request->hargabeli[$i]);
-            $totalhargaasli += ($barangmentah->harga * $request->jumlah[$i]);
+            // $totalharga += ($request->hargabeli[$i]);
+            // $totalhargaasli += ($barangmentah->harga * $request->jumlah[$i]);
             
         }
 
-        $pembelian->totalharga = $totalharga + $request->ongkir;
-        $pembelian->potongan = $totalhargaasli - $totalharga;
+        // $pembelian->totalharga = $totalharga + $request->ongkir;
+        // $pembelian->potongan = $totalhargaasli - $totalharga;
         $pembelian->save();
         // redirect ke pembelian.index
         return redirect()->route('pembelian.index')->with('success', $request->nama_pembelian . ' berhasil disimpan.');
@@ -125,7 +125,7 @@ class PembelianController extends Controller
             'iddetail.*' => 'required|numeric',
             'idbarang.*' => 'required|numeric',
             'jumlah.*' => 'required|numeric|min:1',
-            'hargabeli.*' => 'required|numeric|min:0',
+            // 'hargabeli.*' => 'required|numeric|min:0',
         ]);
         $pembelian->tanggal = $request->tanggal;
         $pembelian->idpenjual = $request->idpenjual;
@@ -148,18 +148,18 @@ class PembelianController extends Controller
             $detailpembelian = Detail_pembelian::find($request->iddetail[$i]);
             $detailpembelian->idbarang = $request->idbarang[$i];
             $detailpembelian->jumlah = $request->jumlah[$i];
-            $detailpembelian->hargabeli = $request->hargabeli[$i];
+            // $detailpembelian->hargabeli = $request->hargabeli[$i];
             $barangmentah = Barangmentah::find($request->idbarang[$i]);
             $barangmentah->jumlah = $barangmentah->jumlah - $detailpembelian->jumlah;
             $barangmentah->jumlah = $barangmentah->jumlah + $request->jumlah[$i];
             $barangmentah->save();
             $detailpembelian->save();
 
-            $totalharga += ($request->hargabeli[$i]);
-            $totalhargaasli += ($barangmentah->harga * $request->jumlah[$i]);
+            // $totalharga += ($request->hargabeli[$i]);
+            // $totalhargaasli += ($barangmentah->harga * $request->jumlah[$i]);
         }
         $pembelian->totalharga = $totalharga + $request->ongkir;
-        $pembelian->potongan = $totalhargaasli - $totalharga;
+        // $pembelian->potongan = $totalhargaasli - $totalharga;
         $pembelian->save();
         return redirect()->route('pembelian.index')->with('success', $request->nama_pembelian . ' berhasil diperbarui.');
     }

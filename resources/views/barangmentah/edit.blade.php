@@ -25,20 +25,20 @@
                 </div>
                 <div class="form-group">
                     <label for="jumlah">Jumlah</label>
-                    <input type="number" class="form-control" name="jumlah" placeholder="Tambah Jumlah"
+                    <input type="text" class="form-control" name="jumlah" placeholder="Tambah Jumlah"
                         value="{{$barangmentah->jumlah}}">
                     @error('jumlah')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="harga">Harga</label>
                     <input type="number" class="form-control" name="harga" placeholder="Tambah Harga"
                         value="{{$barangmentah->harga}}">
                     @error('harga')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
         <button type="submit" class="btn btn-rounded btn-primary mr-2">Simpan</button>
         <a href="{{ route('barangmentah.index') }}" class="btn btn-rounded btn-light">Batal</a>
         </form>

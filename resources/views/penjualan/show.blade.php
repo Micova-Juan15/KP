@@ -28,14 +28,13 @@
                 <table id="tableform" class="table table-striped">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>
                                 Barang Jadi
                             </th>
                             <th>
                                 Jumlah
                             </th>
-                            <th>
+                            {{-- <th>
                                 Harga Satuan
                             </th>
                             <th>
@@ -43,7 +42,7 @@
                             </th>
                             <th>
                                 Total Harga Nego
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +51,6 @@
                         @endphp
                         @foreach ($penjualan->detailpenjualan as $item)
                             <tr>
-                                <td></td>
                                 <td>
                                     {{ $item->barangjadi->nama }}
                                     ({{ $item->barangjadi->ukuran }})
@@ -63,7 +61,7 @@
                                 @php
                                     $totalqty += $item->jumlah;
                                 @endphp
-                                <td>
+                                {{-- <td>
                                     {{ number_format($item->barangjadi->harga), 0 }}
                                 </td>
                                 <td>
@@ -71,12 +69,12 @@
                                 </td>
                                 <td>
                                     {{ number_format($item->hargajual), 0 }}
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
 
                         {{-- <tr><td></td></tr> --}}
-                        <tr>
+                        {{-- <tr>
                             <td>
                                 Sub Total
                             </td>
@@ -84,32 +82,28 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            {{-- <td>{{ number_format($penjualan->totalharga - $penjualan->ongkir ?? 0) }}</td> --}}
                             <td>{{ number_format($penjualan->totalharga) }}
                             </td>
-                        </tr>
-                        <tr>
+                        </tr> --}}
+                        {{-- <tr>
                             <td>Ongkir</td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            {{-- <td>{{ number_format($penjualan->pengantaran->ongkir ?? 0) }} </td> --}}
                             <td>{{ number_format(optional($penjualan->pengantaran)->ongkir ?? 0) }}
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td>Total </td>
-                            <td></td>
                             <td>
                                 {{ $totalqty }}
                             </td>
+                            {{-- <td></td>
                             <td></td>
-                            <td></td>
-                            {{-- <td>{{ number_format($penjualan->totalharga + $penjualan->pengantaran->ongkir ?? 0), 0 }}</td> --}}
                             <td>{{ number_format(($penjualan->totalharga + optional($penjualan->pengantaran)->ongkir), 0) }}
 
-                            </td>
+                            </td> --}}
                         </tr>
                     </tbody>
                 </table>

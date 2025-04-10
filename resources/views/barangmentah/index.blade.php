@@ -6,7 +6,7 @@
             <h4 class="card-title">Bahan Mentah</h4>
             <div class="table-responsive">
                 @can('create', App\Models\Barangmentah::class)
-                    <a href="{{ route('barangmentah.create') }}" type="button" class="btn btn-primary btn-rounded btn-fw">Tambah
+                    <a href="{{ route('barangmentah.create') }}"style="margin-bottom :10px" type="button" class="btn btn-primary btn-rounded btn-fw">Tambah
                         List Item Baru</a>
                 @endcan
                 @if (Session::get('success'))
@@ -25,9 +25,9 @@
                             <th>
                                 Jumlah
                             </th>
-                            <th>
+                            {{-- <th>
                                 Harga Satuan
-                            </th>
+                            </th> --}}
                             <th>
 
                             </th>
@@ -42,13 +42,13 @@
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>{{ number_format($item->jumlah, 1) }}</td>
-                                <td>{{ number_format($item->harga, 0) }}</td>
+                                    {{-- <td>{{ number_format($item->harga, 0) }}</td> --}}
                                 <td>
                                     <div class="d-flex gap-10">
-                                        @can('update', App\Models\Barangmentah::class)
+                                        {{-- @can('update', App\Models\Barangmentah::class) --}}
                                             <a href="{{ route('barangmentah.edit', ['barangmentah' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        @endcan
+                                        {{-- @endcan --}}
                                         @can('delete', App\Models\Barangmentah::class)
                                             <form action="{{ route('barangmentah.destroy', ['barangmentah' => $item]) }}"
                                                 method="post">

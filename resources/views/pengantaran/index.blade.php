@@ -61,8 +61,8 @@
                                 </td>
                                 <td>
                                     <div class="d-flex gap-10">
-                                        <a href="{{ route('pengantaran.cetak', ['pengantaran' => $item]) }}" type="button"
-                                            class="btn btn-primary btn-rounded btn-fw mr-3">Print</a>
+                                        {{-- <a href="{{ route('pengantaran.cetak', ['pengantaran' => $item]) }}" type="button"
+                                            class="btn btn-primary btn-rounded btn-fw mr-3">Print</a> --}}
                                     @can('update', App\Models\Pengantaran::class)
                                             <a href="{{ route('pengantaran.edit', ['pengantaran' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>

@@ -18,16 +18,16 @@
                     <label for="jumlahbarang">Jumlah :</label>
                     {{$barangjadi->jumlah}}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="harga">Harga :</label>
                     {{$barangjadi->harga}}
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <table id="tableform" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>
-                                    Barang Mentah
+                                    Bahan Mentah Yang Diperlukan 
                                 </th>
                                 <th>Satuan</th>
                                 <th>

@@ -33,14 +33,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="ongkir">Ongkir</label>
                     <input type="number" class="form-control" name="ongkir" placeholder="Masukkan harga ongkir"
                         value="{{ $pembelian->ongkir }}">
                     @error('ongkir')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" class="form-control" name="keterangan" placeholder="Masukkan keterangan"
@@ -60,9 +60,9 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th>
+                                {{-- <th>
                                     Harga Beli
-                                </th>
+                                </th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -83,10 +83,10 @@
                                         <input class="form-control" type="number" name="jumlah[]" id=""
                                             placeholder="Masukkan Jumlah Dibeli" value="{{ $item->jumlah }}">
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <input class="form-control" type="number" name="hargabeli[]" id=""
                                             placeholder="Masukkan Harga Beli" value="{{ $item->hargabeli }}">
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
 

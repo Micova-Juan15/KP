@@ -24,23 +24,24 @@
                 </div>
                 <div class="form-group">
                     <label for="jumlah">Jumlah</label>
-                    <input type="number" class="form-control" name="jumlah" min="1" placeholder="Masukkan Jumlah Barang"
+                    <input type="text" class="form-control" name="jumlah" placeholder="Masukkan Jumlah Barang"
                         value="{{ old('jumlah') }}">
+
                     @error('jumlah')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="harga">Harga per satuan</label>
                     <input type="number" class="form-control" name="harga" min="1" placeholder="Masukkan Harga per Satuan "
                         value="{{ old('harga') }}">
                     @error('harga')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-        <button type="submit" class="btn btn-rounded btn-primary mr-2">Simpan</button>
-        <a href="{{ route('barangmentah.index') }}" class="btn btn-rounded btn-light">Batal</a>
-        </form>
-    </div>
+                </div> --}}
+                <button type="submit" class="btn btn-rounded btn-primary mr-2">Simpan</button>
+                <a href="{{ route('barangmentah.index') }}" class="btn btn-rounded btn-light">Batal</a>
+            </form>
+        </div>
     </div>
 @endsection

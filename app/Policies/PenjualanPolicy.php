@@ -43,9 +43,15 @@ class PenjualanPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user)
+    public function delete(User $user, Penjualan $penjualan)
     {
-        return $user->isManager();
+        // return $user->isManager();
+        $penjualan->pengantarans()->delete();
+
+        // Lalu hapus penjualannya
+        $penjualan->delete();
+
+        return redirect()->route('penjualan.index')->with('success', 'Penjualan berhasil dihapus.');
     }
 
     /**

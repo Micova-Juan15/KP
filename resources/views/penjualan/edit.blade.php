@@ -39,37 +39,47 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                @if ($penjualan->pengantaran!=null)
-                    
-
-                <div >
-                    <div class="form-group">
+                @if ($penjualan->pengantaran != null)
+                    <div>
+                        {{-- <div class="form-group">
                         <label for="ongkir">Ongkir</label>
                         <input type="number" class="form-control" name="ongkir" placeholder="Masukkan biaya pengantaran"
                             value="{{ $penjualan->pengantaran->ongkir }}">
                         @error('ongkir')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="tanggalpengantaran">Tanggal Pengataran</label>
-                        <input type="date" class="form-control" name="tanggalpengantaran" placeholder="Masukkan Tanggal "
-                            value="{{ old('tanggalpengantaran') }}">
-                        @error('tanggalpengantaran')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="idsopir">Nama Sopir</label>
-                        <br>
-                        <select class="form-control" name="idsopir" id=" ">
-                            @foreach ($sopir as $item)
-                                <option value="{{ $item->id }}">
-                                    {{ $item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @endif
+                    </div> --}}
+                        <div class="form-group">
+                            <label for="tanggalpengantaran">Tanggal Pengataran</label>
+                            <input type="date" class="form-control" name="tanggalpengantaran"
+                                placeholder="Masukkan Tanggal " value="{{ old('tanggalpengantaran') }}">
+                            @error('tanggalpengantaran')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="idsopir">Nama Sopir</label>
+                            <br>
+                            <select class="form-control" name="idsopir" id=" ">
+                                @foreach ($sopir as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="idtruk">Plat Kendaraan</label>
+                            <br>
+                            <select class="form-control" name="idtruk" id=" ">
+                                @foreach ($truk as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->plat }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                @endif
                 <div class="form-group">
                     <table id="tableform">
                         <thead>
@@ -80,9 +90,9 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th>
+                                {{-- <th>
                                     Harga Jual
-                                </th>
+                                </th> --}}
                                 <th>
 
                                 </th>
@@ -96,10 +106,10 @@
                                     <td>
                                         <select name="idbarang[]" id="" class="form-control">
                                             @foreach ($barang as $items)
-                                                <option value="{{ $items->id }}"                                                    
+                                                <option value="{{ $items->id }}"
                                                     {{ $items->id == $item->idbarang ? '' : 'selected' }}>
                                                     {{ $items->nama }}
-                                                    {{ $items->ukuran }}
+                                                    ({{ $items->ukuran }})
                                                 </option>
                                             @endforeach
                                         </select>
@@ -109,11 +119,11 @@
                                             placeholder="Masukkan Jumlah Dibeli " class="form-control"
                                             value="{{ $item->jumlah }}">
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <input type="number" name="hargajual[]" min="1" id=""
                                             placeholder="Masukkan Harga Jual" class="form-control"
                                             value="{{ $item->hargajual }}">
-                                    </td>
+                                    </td> --}}
                                     <td>
 
                                     </td>

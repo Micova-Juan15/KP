@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Barang Jadi</h4>
+            <h4 class="card-title">Produk Jadi</h4>
             <div class="table-responsive">
                     <!-- The current user can create new posts... -->
                     <div style="margin-bottom: 10px">
@@ -41,9 +41,9 @@
                             <th>
                                 Stock
                             </th>
-                            <th>
+                            {{-- <th>
                                 Harga Satuan
-                            </th>
+                            </th> --}}
                             <th>
 
                             </th>
@@ -55,18 +55,19 @@
                     <tbody>
                         @foreach ($barangjadi as $item)
                             <tr>
+                                
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ number_format($item->jumlah, 0) }}</td>
-                                <td>{{ number_format($item->harga, 0) }}</td>
+                                {{-- <td>{{ number_format($item->harga, 0) }}</td> --}}
                                 <td>
 
                                     <div class="d-flex gap-10">
-                                        @can('update', App\Models\Barangjadi::class)
+                                        {{-- @can('update', App\Models\Barangjadi::class) --}}
                                             <a href="{{ route('barangjadi.edit', ['barangjadi' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        @endcan
+                                        {{-- @endcan --}}
                                         @can('delete', App\Models\Barangjadi::class)
                                             <form action="{{ route('barangjadi.destroy', ['barangjadi' => $item]) }}"
                                                 method="post">

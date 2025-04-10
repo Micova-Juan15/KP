@@ -37,7 +37,7 @@ class BarangmentahPolicy
      */
     public function update(User $user)
     {
-        return $user->isManager();
+        // return $user->isManager();
     }
 
     /**

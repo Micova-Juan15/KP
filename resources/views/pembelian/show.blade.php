@@ -36,9 +36,9 @@
                             {{-- <th>
                                 Potongan
                             </th> --}}
-                            <th>
+                            {{-- <th>
                                 Harga
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -62,19 +62,15 @@
                                 {{-- <td>
                                     {{number_format(($item->barangmentah->harga*$item->jumlah)-$item->hargabeli,0)}}
                                 </td> --}}
-                                <td>
+                                {{-- <td>
                                     {{number_format ($item->hargabeli),0 }}
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
-                        <tr>
+                     
+                        {{-- <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            {{-- <td></td>
-                            <td></td> --}}
                             <td>
                                Sub Total 
                             </td>
@@ -82,15 +78,14 @@
                                 
                             </td>
                             <td>{{number_format($pembelian->totalharga-$pembelian->ongkir,0)}}</td>
-                        </tr>
-                        <tr>
-                            {{-- <td></td>
-                            <td></td>
-                            <td></td> --}}
+                        </tr> --}}
+                        {{-- <tr>
+                            
                             <td >Ongkir</td>
                             <td></td>
                             <td>{{number_format($pembelian->ongkir)}} </td>
-                        </tr>
+                        </tr> --}}
+                     
                         <tr>
                             {{-- <td></td>
                             <td></td>
@@ -99,7 +94,7 @@
                                 Total 
                             </td>
                             <td>{{$totalqty}}</td>
-                            <td >{{number_format($pembelian->totalharga),0}}</td>
+                            {{-- <td >{{number_format($pembelian->totalharga),0}}</td> --}}
                         </tr>
                     </tbody>
                 </table>

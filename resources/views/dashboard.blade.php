@@ -290,14 +290,7 @@
                         @endforeach
                     ]
                 }
-                // {
-                //     name: 'Penjualan Tahun lalu',
-                //     data: [
-                //         @foreach ($grafik as $item)
-                //             {{ $item->totalharga }},
-                //         @endforeach
-                //     ]
-                // }
+                
             ]
         });
     </script>

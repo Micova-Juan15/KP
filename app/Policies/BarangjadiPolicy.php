@@ -46,6 +46,7 @@ class BarangjadiPolicy
     public function delete(User $user)
     {
         return $user->isManager();
+        
     }
 
     /**

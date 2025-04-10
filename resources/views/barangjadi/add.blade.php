@@ -3,13 +3,16 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Tambah Barang</h4>
+            <h4 class="card-title">Tambah Produk Baru</h4>
             <form class="forms-sample" action="{{ route('barangjadi.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="nama">Nama barang</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Tambah Barang"
-                        value="{{ old('barang') }}">
+                    <label for="nama">Nama Produk</label>
+                    {{-- <input type="text" class="form-control" name="nama" placeholder="Tambah Barang"
+                        value="{{ old('barang') }}"> --}}
+                    <input type="text" class="form-control" name="nama" placeholder="Tambah Produk Baru"
+                        value="{{ old('nama') }}">
+
                     @error('nama')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -23,21 +26,22 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="jumlahbarang">Jumlah</label>
-                    <input type="number" class="form-control" name="jumlahbarang" placeholder="Tambah Jumlah"
+                    <label for="jumlahbarang">Stock</label>
+                    <input type="number" class="form-control" name="jumlahbarang" placeholder="Tambah Stock"
                         value="{{ old('jumlahbarang') }}">
-                    @error('jumlah')
+                    {{-- @error('jumlah') --}}
+                    @error('jumlahbarang')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="harga">Harga</label>
                     <input type="number" class="form-control" name="harga" placeholder="Tambah Harga"
                         value="{{ old('harga') }}">
                     @error('harga')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <button class="btn btn-success" type="button" onclick="addrow( )">
                         Tambah
@@ -45,8 +49,8 @@
                     <table id="tableform" width="100%">
                         <thead>
                             <tr>
-                                <th  >
-                                    Barang Mentah
+                                <th>
+                                    Bahan Mentah
                                 </th>
                                 <th>
                                     Jumlah
@@ -68,11 +72,11 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" name="jumlah[]" id="" required step="any"
-                                        placeholder="Masukkan Jumlah ">
+                                    <input class="form-control" type="number" name="jumlah[]" id="" required
+                                        step="any" placeholder="Masukkan Jumlah ">
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )" >
+                                    <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )">
                                         Hapus
                                     </button>
                                 </td>

@@ -49,14 +49,14 @@
                     Apakah anda ingin menambah pengantaran ?
                 </label>
                 <div id="checkbox" style="display: none">
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="ongkir">Ongkir</label>
                         <input type="number" class="form-control" name="ongkir" placeholder="Masukkan biaya pengantaran"
                             value="{{ old('ongkir') }}">
                         @error('ongkir')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="tanggalpengantaran">Tanggal Pengataran</label>
                         <input type="date" class="form-control" name="tanggalpengantaran" placeholder="Masukkan Tanggal "
@@ -103,11 +103,11 @@
                                 <th>
                                     Jumlah
                                 </th>
-                                <th style="padding-right: 20px" >Harga per satuan</th>
+                                {{-- <th style="padding-right: 20px" >Harga per satuan</th>
 
                                 <th style="padding-left: 20px">
                                     Harga Jual
-                                </th>
+                                </th> --}}
                                 <th>
 
                                 </th>
@@ -138,13 +138,13 @@
                                         onchange="hitungTotal(this)" placeholder="Masukkan Jumlah Dijual "
                                         class="form-control jumlah">
                                 </td>
-                                <td style="padding-right: 20px" class="col-harga-per-item form-control" >
+                                {{-- <td style="padding-right: 20px" class="col-harga-per-item form-control" >
                                     0
-                                </td>
-                                <td style="padding-left: 20px">
+                                </td> --}}
+                                {{-- <td style="padding-left: 20px">
                                     <input type="number" name="hargajual[]" min="1" id=""
                                         placeholder="Masukkan Harga Jual" class="form-control totalHarga">
-                                </td>
+                                </td> --}}
                                 <td style="padding-right: 20px">
                                     <button class="btn btn-danger" type="button" onclick="this.closest('tr').remove( )">
                                         Hapus

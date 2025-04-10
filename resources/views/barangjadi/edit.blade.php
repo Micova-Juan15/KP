@@ -31,14 +31,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="harga">Harga</label>
                     <input type="number" class="form-control" name="harga" placeholder="Tambah Harga"
                         value="{{$barangjadi->harga}}">
                     @error('harga')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-rounded btn-primary mr-2">Simpan</button>
                 <a href="{{ route('barangjadi.index') }}" class="btn btn-rounded btn-light">Batal</a>
             </form>

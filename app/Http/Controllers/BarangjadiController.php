@@ -39,13 +39,14 @@ class BarangjadiController extends Controller
             'nama' => 'required',
             'ukuran' => 'required',
             'jumlahbarang' => 'required|min:1|numeric',
-            'harga' => 'required|numeric',
+            // 'harga' => 'required|numeric',
          ]);
         $barangjadi= new Barangjadi();
         $barangjadi->nama=$request->nama;
         $barangjadi->ukuran=$request->ukuran;
         $barangjadi->jumlah=$request->jumlahbarang;
-        $barangjadi->harga=$request->harga;
+        // $barangjadi->harga=$request->harga;
+        $barangjadi->harga = $request->harga ?? 0;
         $barangjadi->save();
         for ($i=0; $i < count($request->idbarang); $i++) { 
             $resep = new Resep();
@@ -87,12 +88,12 @@ class BarangjadiController extends Controller
             'nama' => 'required',
             'ukuran' => 'required',
             'jumlah' => 'required|min:1|numeric',
-            'harga' => 'required|numeric',
+            // 'harga' => 'required|numeric',
          ]);
         $barangjadi->nama = $request->nama;
         $barangjadi->ukuran = $request->ukuran;
         $barangjadi->jumlah = $request->jumlah;
-        $barangjadi->harga = $request->harga;
+        // $barangjadi->harga = $request->harga;
         $barangjadi->save();
 
         return redirect()->route('barangjadi.index')->with('success', $request->nama_barangjadi . ' berhasil diperbarui.');

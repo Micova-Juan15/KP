@@ -19,7 +19,6 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-
         $data['penjualan'] = Penjualan::all();
         // dd($data['penjualan']);
         return view('penjualan.index', $data);
@@ -50,31 +49,34 @@ class PenjualanController extends Controller
 
         // try {
         // Validasi input
-        $request->validate([
-            'tanggal' => 'required|date',
-            'idpembeli' => 'required|numeric',
-            'idnota' => 'required|numeric',
-            'idbarang' => 'required|array',
-            'jumlah' => 'required|array',
-            'hargajual' => 'required|array',
-            // 'ongkir' => 'required|numeric',
-        ], [
-            'tanggal.required' => 'Tanggal penjualan harus diisi.',
-            // 'ongkir.required' => 'ongkir harus diisi harus diisi.',x
-            'tanggal.date' => 'Format tanggal tidak valid.',
-            'idpembeli.required' => 'Pilih pembeli.',
-            'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
-            'idnota.required' => 'Masukkan nota.',
-            'idnota.numeric' => 'ID nota harus berupa angka.',
-            'idbarang.required' => 'Pilih setidaknya satu barang.',
-            'jumlah.*.required' => 'Jumlah barang harus diisi.',
-            'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
-            'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
-            'hargajual.*.required' => 'Harga jual barang harus diisi.',
-            'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
-            'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
-            // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
-        ]);
+        $request->validate(
+            [
+                'tanggal' => 'required|date',
+                'idpembeli' => 'required|numeric',
+                'idnota' => 'required|numeric',
+                'idbarang' => 'required|array',
+                'jumlah' => 'required|array',
+                // 'hargajual' => 'required|array',
+                // 'ongkir' => 'required|numeric',
+            ],
+            [
+                'tanggal.required' => 'Tanggal penjualan harus diisi.',
+                // 'ongkir.required' => 'ongkir harus diisi harus diisi.',x
+                'tanggal.date' => 'Format tanggal tidak valid.',
+                'idpembeli.required' => 'Pilih pembeli.',
+                'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
+                'idnota.required' => 'Masukkan nota.',
+                'idnota.numeric' => 'ID nota harus berupa angka.',
+                'idbarang.required' => 'Pilih setidaknya satu barang.',
+                'jumlah.*.required' => 'Jumlah barang harus diisi.',
+                'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
+                'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
+                // 'hargajual.*.required' => 'Harga jual barang harus diisi.',
+                // 'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
+                // 'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
+                // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
+            ],
+        );
 
         $penjualan = new Penjualan();
         $penjualan->tanggal = $request->tanggal;
@@ -93,7 +95,7 @@ class PenjualanController extends Controller
             $request->validate([
                 'idbarang.' . $i => 'required|numeric',
                 'jumlah.' . $i => 'required|numeric|min:1',
-                'hargajual.' . $i => 'required|numeric|min:0',
+                // 'hargajual.' . $i => 'required|numeric|min:0',
                 // Tambahkan aturan validasi lainnya sesuai kebutuhan
             ]);
 
@@ -101,7 +103,8 @@ class PenjualanController extends Controller
             $detailpenjualan->idpenjualan = $penjualan->id;
             $detailpenjualan->idbarang = $request->idbarang[$i];
             $detailpenjualan->jumlah = $request->jumlah[$i];
-            $detailpenjualan->hargajual = $request->hargajual[$i];
+            // $detailpenjualan->hargajual = $request->hargajual[$i];
+            $detailpenjualan->hargajual = 0;
             $detailpenjualan->save();
 
             $barangjadi = Barangjadi::find($request->idbarang[$i]);
@@ -114,12 +117,15 @@ class PenjualanController extends Controller
             $barangjadi->jumlah = $hasil;
             $barangjadi->save();
 
-            $totalharga += $request->hargajual[$i];
+            // $totalharga += $request->hargajual[$i];
             $totalhargaasli += $barangjadi->harga * $request->jumlah[$i];
         }
 
-        $penjualan->totalharga = $totalharga;
-        $penjualan->potongan = $totalhargaasli - $totalharga;
+        // $penjualan->totalharga = $totalharga;
+        // $penjualan->potongan = $totalhargaasli - $totalharga;
+        // $penjualan->save();
+        $penjualan->totalharga = $totalhargaasli; // atau kasih 0 dulu
+        $penjualan->potongan = 0; // karena tanpa harga jual, potongan ngga bisa dihitung
         $penjualan->save();
         if ($request->checkpengantaran == 'on') {
             $pengantaran = new Pengantaran();
@@ -127,7 +133,7 @@ class PenjualanController extends Controller
             $pengantaran->idpenjualan = $penjualan->id;
             $pengantaran->idsopir = $request->idsopir;
             $pengantaran->idtruk = $request->idtruk;
-            $pengantaran->ongkir = $request->ongkir;
+            // $pengantaran->ongkir = $request->ongkir;
             $pengantaran->status = 0;
             $pengantaran->save();
 
@@ -141,23 +147,21 @@ class PenjualanController extends Controller
             $truk->save();
         }
 
-
-
         DB::commit();
-        return redirect()->route('penjualan.index')->with('success', $request->nama_penjualan . ' berhasil disimpan.');
+        return redirect()
+            ->route('penjualan.index')
+            ->with('success', $request->nama_penjualan . ' berhasil disimpan.');
         // } catch (\Exception $e) {
         //     DB::rollBack();
         //     return redirect()->route('penjualan.index')->with('warning', $e->getMessage());
         // }
     }
 
-
     /**
      * Display the specified resource.
      */
     public function show(Penjualan $penjualan)
     {
-
         return view('penjualan.show', compact('penjualan'));
     }
 
@@ -170,6 +174,9 @@ class PenjualanController extends Controller
         $data['penjualan'] = $penjualan;
         $data['sopir'] = Sopir::all();
         $data['barang'] = Barangjadi::all();
+        // $data['truk'] = Truk::all();
+        $data['truk'] = Truk::where('ketersediaan', '1')->get();
+
 
         return view('penjualan.edit', $data);
     }
@@ -182,29 +189,32 @@ class PenjualanController extends Controller
         // dd($request->ongkir);
         DB::beginTransaction();
 
-        $request->validate([
-            'tanggal' => 'required|date',
-            'idpembeli' => 'required|numeric',
-            'idnota' => 'required|numeric',
-            'idbarang' => 'required|array',
-            'jumlah' => 'required|array',
-            'hargajual' => 'required|array',
-        ], [
-            'tanggal.required' => 'Tanggal penjualan harus diisi.',
-            'tanggal.date' => 'Format tanggal tidak valid.',
-            'idpembeli.required' => 'Pilih pembeli.',
-            'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
-            'idnota.required' => 'Masukkan nota.',
-            'idnota.numeric' => 'ID nota harus berupa angka.',
-            'idbarang.required' => 'Pilih setidaknya satu barang.',
-            'jumlah.*.required' => 'Jumlah barang harus diisi.',
-            'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
-            'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
-            'hargajual.*.required' => 'Harga jual barang harus diisi.',
-            'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
-            'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
-            // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
-        ]);
+        $request->validate(
+            [
+                'tanggal' => 'required|date',
+                'idpembeli' => 'required|numeric',
+                'idnota' => 'required|numeric',
+                'idbarang' => 'required|array',
+                'jumlah' => 'required|array',
+                // 'hargajual' => 'required|array',
+            ],
+            [
+                'tanggal.required' => 'Tanggal penjualan harus diisi.',
+                'tanggal.date' => 'Format tanggal tidak valid.',
+                'idpembeli.required' => 'Pilih pembeli.',
+                'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
+                'idnota.required' => 'Masukkan nota.',
+                'idnota.numeric' => 'ID nota harus berupa angka.',
+                'idbarang.required' => 'Pilih setidaknya satu barang.',
+                'jumlah.*.required' => 'Jumlah barang harus diisi.',
+                'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
+                'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
+                // 'hargajual.*.required' => 'Harga jual barang harus diisi.',
+                // 'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
+                // 'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
+                // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
+            ],
+        );
         $penjualan->tanggal = $request->tanggal;
         $penjualan->idpembeli = $request->idpembeli;
         $penjualan->idnota = $request->idnota;
@@ -212,12 +222,10 @@ class PenjualanController extends Controller
         $penjualan->potongan = $request->potongan ?? 0;
         $penjualan->save();
         $pengantaran = Pengantaran::where('idpenjualan', $penjualan->id)->first();
-        $pengantaran->ongkir = $request->ongkir;
+        // $pengantaran->ongkir = $request->ongkir;
         $pengantaran->save();
         $totalharga = 0;
         $totalhargaasli = 0;
-
-
 
         for ($i = 0; $i < count($request->idbarang); $i++) {
             // Validasi setiap item detail penjualan
@@ -229,69 +237,83 @@ class PenjualanController extends Controller
 
             //     // Tambahkan aturan validasi lainnya sesuai kebutuhan
             // ]);
-            $request->validate([
-                'tanggal' => 'required|date',
-                'idpembeli' => 'required|numeric',
-                'idnota' => 'required|numeric',
-                'idbarang' => 'required|array',
-                'jumlah' => 'required|array',
-                'hargajual' => 'required|array',
-            ], [
-                'tanggal.required' => 'Tanggal penjualan harus diisi.',
-                'tanggal.date' => 'Format tanggal tidak valid.',
-                'idpembeli.required' => 'Pilih pembeli.',
-                'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
-                'idnota.required' => 'Masukkan nota.',
-                'idnota.numeric' => 'ID nota harus berupa angka.',
-                'idbarang.required' => 'Pilih setidaknya satu barang.',
-                'jumlah.*.required' => 'Jumlah barang harus diisi.',
-                'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
-                'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
-                'hargajual.*.required' => 'Harga jual barang harus diisi.',
-                'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
-                'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
-                // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
-            ]);
+            $request->validate(
+                [
+                    'tanggal' => 'required|date',
+                    'idpembeli' => 'required|numeric',
+                    'idnota' => 'required|numeric',
+                    'idbarang' => 'required|array',
+                    'jumlah' => 'required|array',
+                    // 'hargajual' => 'required|array',
+                ],
+                [
+                    'tanggal.required' => 'Tanggal penjualan harus diisi.',
+                    'tanggal.date' => 'Format tanggal tidak valid.',
+                    'idpembeli.required' => 'Pilih pembeli.',
+                    'idpembeli.numeric' => 'ID pembeli harus berupa angka.',
+                    'idnota.required' => 'Masukkan nota.',
+                    'idnota.numeric' => 'ID nota harus berupa angka.',
+                    'idbarang.required' => 'Pilih setidaknya satu barang.',
+                    'jumlah.*.required' => 'Jumlah barang harus diisi.',
+                    'jumlah.*.numeric' => 'Jumlah barang harus berupa angka.',
+                    'jumlah.*.min' => 'Jumlah barang harus minimal 1.',
+                    'hargajual.*.required' => 'Harga jual barang harus diisi.',
+                    'hargajual.*.numeric' => 'Harga jual barang harus berupa angka.',
+                    'hargajual.*.min' => 'Harga jual barang harus minimal 0.',
+                    // Tambahkan pesan peringatan kustom lainnya sesuai kebutuhan
+                ],
+            );
 
             $detailpenjualan = Detail_penjualan::find($request->iddetail[$i]);
             $detailpenjualan->idpenjualan = $penjualan->id;
             $detailpenjualan->idbarang = $request->idbarang[$i];
             $detailpenjualan->jumlah = $request->jumlah[$i];
-            $detailpenjualan->hargajual = $request->hargajual[$i];
+            // $detailpenjualan->hargajual = $request->hargajual[$i];
             $detailpenjualan->save();
 
             $barangjadi = Barangjadi::find($request->idbarang[$i]);
             $barangjadi->jumlah = $barangjadi->jumlah - $request->jumlah[$i];
-            $hasil = $barangjadi->jumlah - ($request->jumlah[$i]);
+            $hasil = $barangjadi->jumlah - $request->jumlah[$i];
             if ($hasil < 0) {
                 DB::rollBack();
-                return redirect()->route('barangjadi.index')->with('warning', $barangjadi->nama . ' kekurangan stock');
+                return redirect()
+                    ->route('barangjadi.index')
+                    ->with('warning', $barangjadi->nama . ' kekurangan stock');
             }
-            $barangjadi->jumlah = $barangjadi->jumlah - ($request->jumlah[$i]);
+            $barangjadi->jumlah = $barangjadi->jumlah - $request->jumlah[$i];
             $barangjadi->save();
 
-            $totalharga += ($request->hargajual[$i]);
-            $totalhargaasli += ($barangjadi->harga * $request->jumlah[$i]);
+            // $totalharga += $request->hargajual[$i];
+            $totalhargaasli += $barangjadi->harga * $request->jumlah[$i];
         }
 
-        $penjualan->totalharga = $totalharga;
-        $penjualan->potongan = $totalhargaasli - $totalharga;
+        // $penjualan->totalharga = $totalharga;
+        // $penjualan->potongan = $totalhargaasli - $totalharga;
+        // $penjualan->save();
+        $penjualan->totalharga = $totalhargaasli; // atau kasih 0 dulu
+        $penjualan->potongan = 0; // karena tanpa harga jual, potongan ngga bisa dihitung
         $penjualan->save();
-
 
         DB::commit();
 
-        return redirect()->route('penjualan.index')->with('success', $request->nama_penjualan . ' berhasil disimpan.');
+        return redirect()
+            ->route('penjualan.index')
+            ->with('success', $request->nama_penjualan . ' berhasil disimpan.');
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Penjualan $penjualan)
     {
+        // $penjualan->pengantaran()?->delete(); // pakai optional chaining biar aman
+
+        // return redirect()->route('penjualan.index')->with('success', $penjualan->nama . ' berhasil dihapus.');
+
+        $penjualan->pengantaran()?->delete();
+        $penjualan->detailpenjualan()->delete();
         $penjualan->delete();
 
-        return redirect()->route('penjualan.index')->with('success', $penjualan->nama . ' berhasil dihapus.');
+        return redirect()->route('penjualan.index')->with('success', 'Penjualan berhasil dihapus.');
     }
 }

@@ -26,7 +26,7 @@
                             <th>
                                 No.Nota
                             </th>
-                            <th>
+                            {{-- <th>
                                 Ongkir
                             </th>
                             <th>
@@ -34,7 +34,7 @@
                             </th>
                             <th>
                                 Total Harga
-                            </th>
+                            </th> --}}
                             <th>
 
                             </th>
@@ -50,16 +50,16 @@
                                 <td>{{ $item->pembeli->nama }}</td>
                                 <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->idnota }}</td>
-                                <td>{{$item->pengantaran->ongkir?? '0'}} </td>
+                                {{-- <td>{{$item->pengantaran->ongkir?? '0'}} </td>
                                 <td>{{ number_format($item->potongan,0) }}</td>
-                                <td>{{ number_format($item->totalharga,0) }}</td>
+                                <td>{{ number_format($item->totalharga,0) }}</td> --}}
                                 <td>
                                     <div class="d-flex gap-10">
-                                        @can('update', App\Models\Penjualan::class)
+                                        {{-- @can('update', App\Models\Penjualan::class) --}}
                                             <a href="{{ route('penjualan.edit', ['penjualan' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        @endcan
-                                        @can('delete', App\Models\Penjualan::class)
+                                        {{-- @endcan --}}
+                                        {{-- @can('delete', App\Models\Penjualan::class) --}}
                                             <form action="{{ route('penjualan.destroy', ['penjualan' => $item]) }}"
                                                 method="post">
                                                 @csrf
@@ -67,7 +67,7 @@
                                                 <button type="submit"
                                                     class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                             </form>
-                                        @endcan
+                                        {{-- @endcan --}}
                                     </div>
                                 <td>
                                     <a href="{{ route('penjualan.show', ['penjualan' => $item]) }}">
