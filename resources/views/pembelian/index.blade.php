@@ -58,11 +58,10 @@
                                 <td>{{ number_format($item->totalharga, 0) }}</td> --}}
                                 <td>
                                     <div class="d-flex gap-10">
-                                        @can('update', App\Models\Pembelian::class)
+                                        {{-- @can('update', App\Models\Pembelian::class) --}}
                                             <a href="{{ route('pembelian.edit', ['pembelian' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        @endcan
-                                        @can('delete', App\Models\Pembelian::class)
+                                        {{-- @endcan --}}
                                             <form action="{{ route('pembelian.destroy', ['pembelian' => $item]) }}"
                                                 method="post">
                                                 @csrf
@@ -70,7 +69,6 @@
                                                 <button type="submit"
                                                     class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                             </form>
-                                        @endcan
                                     </div>
                                 </td>
                                 <td>

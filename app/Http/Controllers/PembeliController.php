@@ -35,7 +35,7 @@ class PembeliController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'alamat' => 'required',
-            'hp' => 'required|string|regex:/^[0-9]+$/|min:7|max:13',        
+            'hp' => 'required|string|regex:/^[0-9]+$/|min:0|max:13',        
         ]);
 
         $pembeli = new Pembeli();

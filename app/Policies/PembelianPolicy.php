@@ -37,7 +37,7 @@ class PembelianPolicy
      */
     public function update(User $user)
     {
-        return $user->isManager();
+
     }
 
     /**
@@ -45,7 +45,7 @@ class PembelianPolicy
      */
     public function delete(User $user)
     {
-        return $user->isManager();
+
     }
 
     /**

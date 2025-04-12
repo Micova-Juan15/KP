@@ -63,11 +63,11 @@
                                     <div class="d-flex gap-10">
                                         {{-- <a href="{{ route('pengantaran.cetak', ['pengantaran' => $item]) }}" type="button"
                                             class="btn btn-primary btn-rounded btn-fw mr-3">Print</a> --}}
-                                    @can('update', App\Models\Pengantaran::class)
+                                    {{-- @can('update', App\Models\Pengantaran::class) --}}
                                             <a href="{{ route('pengantaran.edit', ['pengantaran' => $item]) }}" type="button"
                                                 class="btn btn-primary btn-rounded btn-fw mr-3">Edit</a>
-                                        @endcan
-                                        @can('delete', App\Models\Pengantaran::class)
+                                        {{-- @endcan --}}
+                                        {{-- @can('delete', App\Models\Pengantaran::class) --}}
                                             <form action="{{ route('pengantaran.destroy', ['pengantaran' => $item]) }}"
                                                 method="post">
                                                 @csrf
@@ -75,7 +75,7 @@
                                                 <button type="submit"
                                                     class="btn btn-primary btn-rounded btn-fw">Delete</button>
                                             </form>
-                                        @endcan
+                                        {{-- @endcan --}}
                                     </div>
                                 </td>
 
