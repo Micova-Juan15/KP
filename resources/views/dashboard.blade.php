@@ -197,7 +197,7 @@
             </a>
         @endcan
     </div>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+ {{-- <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -248,7 +248,6 @@
         }
     </style>
     <script>
-        // Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
         Highcharts.chart('container', {
             chart: {
                 type: 'line'
@@ -258,8 +257,6 @@
             },
             subtitle: {
                 text: 'PT. Selekta Prima Sukses'
-                // '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
-                // 'target="_blank">Wikipedia.com</a>'
             },
             xAxis: {
                 categories: [
@@ -293,5 +290,5 @@
                 
             ]
         });
-    </script>
-@endsection
+    </script>--}}
+@endsection  

@@ -68,7 +68,7 @@ class PembelianController extends Controller
             $detailpembelian->idpembelian = $pembelian->id;
             $detailpembelian->idbarang = $request->idbarang[$i];
             $detailpembelian->jumlah = $request->jumlah[$i];
-            // $detailpembelian->hargabeli = $request->hargabeli[$i];
+            $detailpembelian->hargabeli = $request->hargabeli[$i] ?? 0;
             $detailpembelian->save();
             $barangmentah = Barangmentah::find($request->idbarang[$i]);
             $barangmentah->jumlah = $barangmentah->jumlah + $request->jumlah[$i];
